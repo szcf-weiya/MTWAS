@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^vignettes/articles$
+twas_demo
+twas_demo.zip
+R.copy
+scripts
+^data-raw$

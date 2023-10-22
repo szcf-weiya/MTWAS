@@ -1,0 +1,26 @@
+Package: MTWAS
+Type: Package
+Title: Multi-tissue Transcriptome-Wide Association Studies
+Version: 0.1.0
+Authors@R: c(
+    person("Lijun", "Wang", email = "lijun.wang@yale.edu", role = c("aut", "cre")),
+    person("Shuang", "Song", email = "song-s19@mails.tsinghua.edu.cn", role = c("aut")))
+Description: Partitioning and aggregating cross-tissue and 
+    tissue-specific genetic effects in identifying gene-trait associations.
+License: GPL (>= 3)
+Encoding: UTF-8
+Imports:
+    Rcpp (>= 0.12.12),
+    propagate,
+    parallel
+LinkingTo: Rcpp, RcppGSL
+LazyData: true
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

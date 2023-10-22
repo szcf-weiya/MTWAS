@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# custom
+R.copy/
+twas_demo/
+twas_demo.zip
+scripts/

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rm -rf *.cache config.* src/Makevars config.h a.out.dSYM src/*.so src/*.o

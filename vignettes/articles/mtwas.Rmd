@@ -1,0 +1,73 @@
+---
+title: "MTWAS"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MTWAS)
+```
+
+## Step 1: Train Weights
+
+Load demo TWAS data, which consists of 3 genes and 5 tissues (cell types).
+
+```{r}
+data("twas_data")
+str(twas_data)
+```
+
+Firstly, detect cross-tissue eQTLs,
+
+```{r}
+ct.eQTL = select.ct.eQTL(twas_data, verbose = F, ncores = 1)
+ct.eQTL
+```
+
+One can specify `ncores` for parallel computing. 
+
+Then fix those ct.eQTLs, and select the tissue-specific eQTLs,
+
+```{r}
+list.ts.eQTL = select.ts.eQTL(twas_data, ct.eQTL = ct.eQTL, ncores = 1)
+list.ts.eQTL
+```
+
+By default, it returns the list of ts-eQTLs for each tissue. You can also specify the index of tissue to get the corresponding ts-eQTL,
+
+```{r, eval=FALSE}
+select.ts.eQTL(twas_data, ct.eQTL = ct.eQTL, ncores = 1, id.tissue = 1)
+```
+
+## Step 2: Association Test
+
+Load GWAS summary statistics for some phenotype
+
+```{r}
+data("summary_stats")
+str(summary_stats)
+```
+
+Then perform an association test in a tissue-specific manner to retain the tissue specificity of the trait-gene associations.
+
+```{r}
+twas.single.trait(summary_stats, twas_data, list.ts.eQTL)
+```
+
+Alternatively, one can pass a file name to the summary statistics,
+
+```{r, eval=FALSE}
+twas.single.trait(twas_data, "/tmp/gwas_summary_stats.txt", list.ts.eQTL)
+```
+
+For multiple traits, one can pass a list of summary statistics or files, e.g.,
+
+```{r eval=FALSE}
+twas.multiple.trait(twas_data, paste0("/tmp/trait", 1:10, "_gwas_summary_stats.txt"), list.ts.eQTL)
+```
+
