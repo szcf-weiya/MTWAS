@@ -9,7 +9,7 @@ get.cor <- function(x1,x2){
 }
 
 
-#' Create Matrix from Select Terms
+#' Create matrix from select terms
 #' @param xx raw matrix with colnames with natural indexes
 #' @param terms selected terms. If exist interact terms like \code{i*j}, then
 #'  the i-th column would multiply j-th column, and result in a new column.
