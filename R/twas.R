@@ -39,7 +39,7 @@ agtc <- function(a1,a2,b1,b2){
 
 #' Run association test for multiple traits
 #' @param list.stats a list of summary statistics, or a list of files to the summary statistics
-#' @param x data
+#' @param x twas data list
 #' @param list.ts.eQTL a list of tissue-specific eQTL for each tissue
 #' @param ncores number of cores in parallel computing.
 #' @return a list of association tests for all traits
@@ -57,7 +57,7 @@ twas.multi.trait = function(list.stats, x, list.ts.eQTL, ncores = 1) {
 #' An association test in a tissue-specific manner for a phenotype (trait).
 #' @param stats summary statistics for a phenotype. It can be a filename to be read or a data.frame.
 #' Suppose it has 5 columns with colnames \code{rsid}, \code{a1}, \code{a2}, \code{chr}, \code{z}.
-#' @param x data
+#' @param x twas data list
 #' @param list.ts.eQTL a list of \code{ts.eQTL}, each element corresponds to a tissue
 #' @return z-statistics and p-values. Both are of size n_gene x n_tissue.
 #' @importFrom utils read.table
@@ -75,6 +75,8 @@ twas.single.trait = function(stats, x, list.ts.eQTL) {
     z_all[, i] <- rr$z_g
     p_all[, i] <- rr$p_g
   }
+  colnames(z_all) <- colnames(p_all) <- x$E.info$gene
+  rownames(z_all) <- rownames(p_all) <- names(x$E)
   list(zstat = z_all, pval = p_all)
 }
 
