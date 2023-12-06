@@ -2,7 +2,7 @@
 % Please edit documentation in R/train_weights.R
 \name{create_pmatrix_from_terms}
 \alias{create_pmatrix_from_terms}
-\title{Create Matrix from Select Terms}
+\title{Create matrix from select terms}
 \usage{
 create_pmatrix_from_terms(xx, terms)
 }
@@ -16,5 +16,5 @@ the i-th column would multiply j-th column, and result in a new column.}
 a matrix
 }
 \description{
-Create Matrix from Select Terms
+Create matrix from select terms
 }
