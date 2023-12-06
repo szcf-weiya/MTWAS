@@ -48,7 +48,7 @@ print(list.ts.eQTL[[tissue_index]][[gene_index]]$single.snp)
 ### Gene-trait association tests
 
 ```r
-# load GWAS summary statistics (hg38)
+# load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)
 data("summary_stats")
 # association test
 twas.single.trait(summary_stats, twas_data, list.ts.eQTL)
