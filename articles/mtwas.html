@@ -38,11 +38,8 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/mtwas.html">MTWAS</a>
-  </div>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/mtwas.html">Tutorial</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -80,7 +77,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="step-1-train-weights">Step 1: Train Weights<a class="anchor" aria-label="anchor" href="#step-1-train-weights"></a>
+<h2 id="step-0-data-preparation">Step 0: Data Preparation<a class="anchor" aria-label="anchor" href="#step-0-data-preparation"></a>
 </h2>
 <p>Load demo TWAS data, which consists of 3 genes and 5 tissues (cell
 types).</p>
@@ -109,10 +106,10 @@ types).</p>
 <span><span class="co">#&gt;   .. ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. .. ..$ : NULL</span></span>
 <span><span class="co">#&gt;   .. .. ..$ : chr [1:3] "E0" "" ""</span></span>
-<span><span class="co">#&gt;  $ dat   :List of 3</span></span>
+<span><span class="co">#&gt;  $ dat   :List of 2</span></span>
 <span><span class="co">#&gt;   ..$ bed: int [1:715, 1:509] 0 0 0 0 0 0 0 0 1 0 ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "dimnames")=List of 2</span></span>
-<span><span class="co">#&gt;   .. .. ..$ : chr [1:715] "GTEX-111CU_GTEX-111CU" "GTEX-111FC_GTEX-111FC" "GTEX-111VG_GTEX-111VG" "GTEX-111YS_GTEX-111YS" ...</span></span>
+<span><span class="co">#&gt;   .. .. ..$ : NULL</span></span>
 <span><span class="co">#&gt;   .. .. ..$ : chr [1:509] "chr22_16390411_G_A_b38_A" "chr22_16396408_C_G_b38_G" "chr22_16406147_A_G_b38_G" "chr22_16412132_G_A_b38_A" ...</span></span>
 <span><span class="co">#&gt;   ..$ bim:Classes 'data.table' and 'data.frame': 509 obs. of  6 variables:</span></span>
 <span><span class="co">#&gt;   .. ..$ V1: int [1:509] 22 22 22 22 22 22 22 22 22 22 ...</span></span>
@@ -121,14 +118,6 @@ types).</p>
 <span><span class="co">#&gt;   .. ..$ V4: int [1:509] 16390411 16396408 16406147 16412132 16437595 16461056 16472237 16551808 16573830 16577726 ...</span></span>
 <span><span class="co">#&gt;   .. ..$ V5: chr [1:509] "A" "G" "G" "A" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ V6: chr [1:509] "G" "C" "A" "G" ...</span></span>
-<span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
-<span><span class="co">#&gt;   ..$ fam:Classes 'data.table' and 'data.frame': 715 obs. of  6 variables:</span></span>
-<span><span class="co">#&gt;   .. ..$ V1: chr [1:715] "GTEX-111CU" "GTEX-111FC" "GTEX-111VG" "GTEX-111YS" ...</span></span>
-<span><span class="co">#&gt;   .. ..$ V2: chr [1:715] "GTEX-111CU" "GTEX-111FC" "GTEX-111VG" "GTEX-111YS" ...</span></span>
-<span><span class="co">#&gt;   .. ..$ V3: int [1:715] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ V4: int [1:715] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ V5: int [1:715] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   .. ..$ V6: int [1:715] -9 -9 -9 -9 -9 -9 -9 -9 -9 -9 ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
 <span><span class="co">#&gt;  $ E.info:Classes 'data.table' and 'data.frame': 3 obs. of  4 variables:</span></span>
 <span><span class="co">#&gt;   ..$ chr  : int [1:3] 22 22 22</span></span>
@@ -140,8 +129,19 @@ types).</p>
 <span><span class="co">#&gt;   ..$ : int [1:7] 1 2 3 4 5 6 7</span></span>
 <span><span class="co">#&gt;   ..$ : int [1:37] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
 <span><span class="co">#&gt;   ..$ : int [1:509] 1 2 3 4 5 6 7 8 9 10 ...</span></span></code></pre></div>
-<p>Firstly, detect cross-tissue eQTLs,</p>
+<p>If there are missing values in the list of expression matrix, we
+conduct an imputation step. As an illustration, we set some entries as
+<code>NA</code>, and impute them.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">twas_data.miss</span> <span class="op">=</span> <span class="va">twas_data</span></span>
+<span><span class="va">twas_data.miss</span><span class="op">$</span><span class="va">E</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span></span>
+<span><span class="va">twas_data.imp</span> <span class="op">=</span> <span class="fu"><a href="../reference/impute.E.html">impute.E</a></span><span class="op">(</span><span class="va">twas_data.miss</span><span class="op">)</span><span class="op">$</span><span class="va">imp</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="step-1-train-weights">Step 1: Train Weights<a class="anchor" aria-label="anchor" href="#step-1-train-weights"></a>
+</h2>
+<p>Firstly, detect cross-tissue eQTLs,</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ct.eQTL</span> <span class="op">=</span> <span class="fu"><a href="../reference/select.ct.eQTL.html">select.ct.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, verbose <span class="op">=</span> <span class="cn">F</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">ct.eQTL</span></span>
 <span><span class="co">#&gt; $OR11H1</span></span>
@@ -154,7 +154,7 @@ types).</p>
 <span><span class="co">#&gt; numeric(0)</span></span></code></pre></div>
 <p>One can specify <code>ncores</code> for parallel computing.</p>
 <p>Then fix those ct.eQTLs, and select the tissue-specific eQTLs,</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">list.ts.eQTL</span> <span class="op">=</span> <span class="fu"><a href="../reference/select.ts.eQTL.html">select.ts.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, ct.eQTL <span class="op">=</span> <span class="va">ct.eQTL</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">list.ts.eQTL</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
@@ -481,14 +481,14 @@ types).</p>
 <span><span class="co">#&gt; character(0)</span></span></code></pre></div>
 <p>By default, it returns the list of ts-eQTLs for each tissue. You can
 also specify the index of tissue to get the corresponding ts-eQTL,</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/select.ts.eQTL.html">select.ts.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, ct.eQTL <span class="op">=</span> <span class="va">ct.eQTL</span>, ncores <span class="op">=</span> <span class="fl">1</span>, id.tissue <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-2-association-test">Step 2: Association Test<a class="anchor" aria-label="anchor" href="#step-2-association-test"></a>
 </h2>
 <p>Load GWAS summary statistics for some phenotype</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"summary_stats"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">summary_stats</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    1000 obs. of  5 variables:</span></span>
@@ -499,7 +499,7 @@ also specify the index of tissue to get the corresponding ts-eQTL,</p>
 <span><span class="co">#&gt;  $ z   : num  0.584 0.638 0.857 0.835 0.29 ...</span></span></code></pre></div>
 <p>Then perform an association test in a tissue-specific manner to
 retain the tissue specificity of the trait-gene associations.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/twas.single.trait.html">twas.single.trait</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_data</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $zstat</span></span>
 <span><span class="co">#&gt;              [,1]      [,2]      [,3]      [,4]      [,5]</span></span>
@@ -514,11 +514,11 @@ retain the tissue specificity of the trait-gene associations.</p>
 <span><span class="co">#&gt; CCT8L2 0.9626716 0.2684756 0.01206184 0.4252193 0.35262122</span></span></code></pre></div>
 <p>Alternatively, one can pass a file name to the summary
 statistics,</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/twas.single.trait.html">twas.single.trait</a></span><span class="op">(</span><span class="va">twas_data</span>, <span class="st">"/tmp/gwas_summary_stats.txt"</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span></code></pre></div>
 <p>For multiple traits, one can pass a list of summary statistics or
 files, e.g.,</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">twas.multiple.trait</span><span class="op">(</span><span class="va">twas_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"/tmp/trait"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="st">"_gwas_summary_stats.txt"</span><span class="op">)</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
