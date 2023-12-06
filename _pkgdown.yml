@@ -7,3 +7,9 @@ authors:
     href: https://hohoweiya.xyz
   Shuang Song:
     href: https://github.com/shuangsong0110
+
+navbar:
+  components:
+    articles:
+      text: Tutorial
+      href: articles/mtwas.html

@@ -19,8 +19,7 @@ select.ct.eQTL(
  \item{E}{list of cell types, each element is a matrix of size n_sample x n_gene}
  \item{dat}{a list with three named elements. \describe{
    \item{bed}{a matrix of size n_sample x n_snp}
-   \item{bim}{a data frame with n_snp rows, each row is the info for the snp}
-   \item{fam}{a data frame with n_sample rows, each row is the info for the sample}}
+   \item{bim}{a data frame with n_snp rows, each row is the info for the snp}}
  }
  \item{pos}{a list of genes, each element is a vector containing the SNP index that
  locate in the gene, and it corresponds to each row of \code{E.info}.

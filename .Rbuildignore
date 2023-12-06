@@ -9,3 +9,4 @@ scripts
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+\.github$

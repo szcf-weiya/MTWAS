@@ -14,7 +14,8 @@ Encoding: UTF-8
 Imports:
     Rcpp (>= 0.12.12),
     propagate,
-    parallel
+    parallel,
+    missForest
 LinkingTo: Rcpp, RcppGSL
 LazyData: true
 RoxygenNote: 7.2.3

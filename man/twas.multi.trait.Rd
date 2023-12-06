@@ -9,7 +9,7 @@ twas.multi.trait(list.stats, x, list.ts.eQTL, ncores = 1)
 \arguments{
 \item{list.stats}{a list of summary statistics, or a list of files to the summary statistics}
 
-\item{x}{data}
+\item{x}{twas data list}
 
 \item{list.ts.eQTL}{a list of tissue-specific eQTL for each tissue}
 

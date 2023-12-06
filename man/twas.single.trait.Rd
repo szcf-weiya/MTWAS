@@ -10,7 +10,7 @@ twas.single.trait(stats, x, list.ts.eQTL)
 \item{stats}{summary statistics for a phenotype. It can be a filename to be read or a data.frame.
 Suppose it has 5 columns with colnames \code{rsid}, \code{a1}, \code{a2}, \code{chr}, \code{z}.}
 
-\item{x}{data}
+\item{x}{twas data list}
 
 \item{list.ts.eQTL}{a list of \code{ts.eQTL}, each element corresponds to a tissue}
 }
