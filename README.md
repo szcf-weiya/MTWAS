@@ -45,10 +45,10 @@ tissue_index = 1
 print(list.ts.eQTL[[tissue_index]][gene_index]$single.snp)
 ```
 
-### Association tests
+### Gene-trait association tests
 
 ```r
-# load summary statistics
+# load GWAS summary statistics (hg38)
 data("summary_stats")
 # association test
 twas.single.trait(summary_stats, twas_data, list.ts.eQTL)
