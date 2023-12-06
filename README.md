@@ -42,7 +42,7 @@ print(ct.eQTL[[gene_index]])
 gene_name = 'CCT8L2' ## gene name
 gene_index = which(names(ct.eQTL)==gene_name)
 tissue_index = 1
-print(list.ts.eQTL[[tissue_index]][gene_index]$single.snp)
+print(list.ts.eQTL[[tissue_index]][[gene_index]]$single.snp)
 ```
 
 ### Gene-trait association tests
