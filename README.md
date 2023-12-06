@@ -28,6 +28,23 @@ ct.eQTL = select.ct.eQTL(twas_data, verbose = F, ncores = 1)
 list.ts.eQTL = select.ts.eQTL(twas_data, ct.eQTL = ct.eQTL, ncores = 1)
 ```
 
+#### Extract cross-tissue eQTLs
+
+```r
+gene_name = 'CCT8L2' ## gene name
+gene_index = which(names(ct.eQTL)==gene_name)
+print(ct.eQTL[[gene_index]])
+```
+
+#### Extract tissue-specific eQTLs
+
+```r
+gene_name = 'CCT8L2' ## gene name
+gene_index = which(names(ct.eQTL)==gene_name)
+tissue_index = 1
+print(list.ts.eQTL[[tissue_index]][gene_index]$single.snp)
+```
+
 ### Association tests
 
 ```r
