@@ -13,6 +13,10 @@ devtools::install_github("szcf-weiya/MTWAS")
 
 ## :rocket: Get Started
 
+```r
+library(MTWAS)
+```
+
 ### Train weights
 
 ```r
