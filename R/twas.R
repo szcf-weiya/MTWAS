@@ -75,8 +75,8 @@ twas.single.trait = function(stats, x, list.ts.eQTL) {
     z_all[, i] <- rr$z_g
     p_all[, i] <- rr$p_g
   }
-  colnames(z_all) <- colnames(p_all) <- x$E.info$gene
-  rownames(z_all) <- rownames(p_all) <- names(x$E)
+  colnames(z_all) <- colnames(p_all) <- names(x$E)
+  rownames(z_all) <- rownames(p_all) <- x$E.info$gene
   list(zstat = z_all, pval = p_all)
 }
 
