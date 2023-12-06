@@ -144,13 +144,13 @@ types).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ct.eQTL</span> <span class="op">=</span> <span class="fu"><a href="../reference/select.ct.eQTL.html">select.ct.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, verbose <span class="op">=</span> <span class="cn">F</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">ct.eQTL</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; $OR11H1</span></span>
 <span><span class="co">#&gt; numeric(0)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; $POTEH</span></span>
 <span><span class="co">#&gt; numeric(0)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; $CCT8L2</span></span>
 <span><span class="co">#&gt; numeric(0)</span></span></code></pre></div>
 <p>One can specify <code>ncores</code> for parallel computing.</p>
 <p>Then fix those ct.eQTLs, and select the tissue-specific eQTLs,</p>
