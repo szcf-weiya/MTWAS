@@ -189,6 +189,7 @@ select.ts.eQTL = function(x, ct.eQTL, id.tissue = -1, ncores = 1, ...) {
                         fix = ct.eQTL, ...,
                         mc.cores=ncores, mc.preschedule =F)
   }
+  names(soda.imp)=x$E.info$gene
   soda.imp
 }
 
