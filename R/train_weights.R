@@ -78,6 +78,7 @@ select.ct.eQTL = function(x, nne = -1, gam = 1, nF0 = 5,
                    verbose = verbose, allow_empty = allow_empty,
                    mc.cores = ncores, mc.preschedule = F)
   }
+  names(res)=x$E.info$gene
   res
 }
 
