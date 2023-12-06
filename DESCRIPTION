@@ -8,6 +8,8 @@ Authors@R: c(
 Description: Partitioning and aggregating cross-tissue and 
     tissue-specific genetic effects in identifying gene-trait associations.
 License: GPL (>= 3)
+URL: https://github.com/szcf-weiya/MTWAS
+BugReports: https://github.com/szcf-weiya/MTWAS/issues
 Encoding: UTF-8
 Imports:
     Rcpp (>= 0.12.12),

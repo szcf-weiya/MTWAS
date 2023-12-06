@@ -1,4 +1,9 @@
-# MTWAS
+# MTWAS: Multi-tissue Transcriptome-Wide Association Studies
+
+MTWAS is an R package for the paper
+
+> Song, S., Wang, L., Hou, L., & Liu, J. S. (2023). Partitioning and aggregating cross-tissue and tissue-specific
+genetic effects in identifying gene-trait associations.
 
 ## :hammer_and_wrench: Installation
 
@@ -29,5 +34,3 @@ twas.single.trait(summary_stats, twas_data, list.ts.eQTL)
 ```
 
 Data formats and function details: https://hohoweiya.xyz/MTWAS/articles/mtwas.html
-
-
