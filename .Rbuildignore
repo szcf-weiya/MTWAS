@@ -6,3 +6,6 @@ twas_demo.zip
 R.copy
 scripts
 ^data-raw$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
