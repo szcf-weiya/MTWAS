@@ -35,13 +35,12 @@ We use chromosome 22 on whole blood as an example. The list of cell types is det
 
 ```r
 library(MTWAS)
-data("summary_stats")
+data("summary_stats") ## EXAMPLE GWAS summary stats (could be specify by users, format: a data.frame with colnames: rsid, a1, a2, chr, z)
 chr = 22
 cell_type = 'Whole_Blood'
 ### remember to change the path to the downloaded folder!!!
 load(paste0('./gtex_v8_mtwas_eqtls/twas_bim_chr', chr, '.RData'))  ## load twas bim files (downloaded)
 load(paste0('./gtex_v8_mtwas_eqtls/', cell_type, '/twas_eqtl_chr', chr, '.RData')) ## load twas eqtl files (downloaded)
-data("summary_stats") ## toy GWAS summary stats (could be specify by users, format: a data.frame with colnames: rsid, a1, a2, chr, z)
 results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl)
 head(results)
 ```
