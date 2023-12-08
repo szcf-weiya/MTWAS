@@ -161,9 +161,6 @@ twas.res <- function(stats, soda.all.imp,
 #' @importFrom propagate cor2cov
 #' @importFrom stats cov cov2cor pnorm prcomp
 #' @export
-
-### to use the downloaded gtex dataset and run mtwas directly
-
 run_mtwas_easy <- function(stats,
                            twas_bim,
                            #E.info,
