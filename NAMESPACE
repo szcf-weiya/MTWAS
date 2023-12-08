@@ -2,6 +2,7 @@
 
 export(create_pmatrix_from_terms)
 export(impute.E)
+export(run_mtwas_easy)
 export(select.ct.eQTL)
 export(select.ts.eQTL)
 export(soda_model_imp_share)

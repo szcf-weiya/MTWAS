@@ -11,23 +11,18 @@ genetic effects in identifying gene-trait associations.
 devtools::install_github("szcf-weiya/MTWAS")
 ```
 
-## Table of contents
-* [Getting Started](#getting-started)
-* [Run MTWAS with pre-trained GTEx v8 weights](#run-mtwas-with-pre-trained-gtex-v8-weights)
-* [Train your own weights](#train-your-own-weights)
-
-
-
 ## :rocket: Getting Started
 
- :smiley: You could either downloaded the pre-trained GTEx v8 MTWAS weights, or generate your own files!
+ :smiley: You could either download the pre-trained GTEx v8 MTWAS weights, or generate your own files!
 
-## 1. Run MTWAS with pre-trained GTEx v8 weights (Recommended)
+## :one: Run MTWAS with pre-trained GTEx v8 weights (Recommended)
 
 ### Download the pre-trained files:
-`wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate`
 
-`tar -zxvf gtex_v8_mtwas_eqtls.tar.gz`
+```bash
+wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate
+tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
+```
 
 ### MTWAS analysis:
 
@@ -47,7 +42,7 @@ head(results)
 
 
 
-## 2. Train your own weights
+## :two: Train your own weights
 
 ```r
 # load TWAS data
