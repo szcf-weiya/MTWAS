@@ -27,7 +27,7 @@ devtools::install_github("szcf-weiya/MTWAS")
 ### Download the pre-trained files:
 `wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate`
 
-`tar -zxvf gtex_v8_eqtls.tar.gz`
+`tar -zxvf gtex_v8_mtwas_eqtls.tar.gz`
 
 ### MTWAS analysis:
 
