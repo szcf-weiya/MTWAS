@@ -77,34 +77,26 @@
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szcf-weiya/MTWAS"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="table-of-contents">Table of contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
-</h2>
-<ul>
-<li><a href="#getting-started">Getting Started</a></li>
-<li><a href="#run-mtwas-with-pre-trained-gtex-v8-weights">Run MTWAS with pre-trained GTEx v8 weights</a></li>
-<li><a href="#train-your-own-weights">Train your own weights</a></li>
-</ul>
-</div>
-<div class="section level2">
 <h2 id="rocket-getting-started">
 <span class="emoji" data-emoji="rocket">🚀</span> Getting Started<a class="anchor" aria-label="anchor" href="#rocket-getting-started"></a>
 </h2>
-<p><span class="emoji" data-emoji="smiley">😃</span> You could either downloaded the pre-trained GTEx v8 MTWAS weights, or generate your own files!</p>
+<p><span class="emoji" data-emoji="smiley">😃</span> You could either download the pre-trained GTEx v8 MTWAS weights, or generate your own files!</p>
 </div>
 <div class="section level2">
-<h2 id="id_1-run-mtwas-with-pre-trained-gtex-v8-weights-recommended">1. Run MTWAS with pre-trained GTEx v8 weights (Recommended)<a class="anchor" aria-label="anchor" href="#id_1-run-mtwas-with-pre-trained-gtex-v8-weights-recommended"></a>
+<h2 id="one-run-mtwas-with-pre-trained-gtex-v8-weights-recommended">
+<span class="emoji" data-emoji="one">1️⃣</span> Run MTWAS with pre-trained GTEx v8 weights (Recommended)<a class="anchor" aria-label="anchor" href="#one-run-mtwas-with-pre-trained-gtex-v8-weights-recommended"></a>
 </h2>
 <div class="section level3">
 <h3 id="download-the-pre-trained-files">Download the pre-trained files:<a class="anchor" aria-label="anchor" href="#download-the-pre-trained-files"></a>
 </h3>
-<p><code>wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate</code></p>
-<p><code>tar -zxvf gtex_v8_mtwas_eqtls.tar.gz</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/<span class="pp">?</span>dl=1 <span class="at">--no-check-certificate</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> gtex_v8_mtwas_eqtls.tar.gz</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mtwas-analysis">MTWAS analysis:<a class="anchor" aria-label="anchor" href="#mtwas-analysis"></a>
 </h3>
 <p>We use chromosome 22 on whole blood as an example. The list of cell types is detailed in <code>ct_use.RData</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"summary_stats"</span><span class="op">)</span> <span class="co">## EXAMPLE GWAS summary stats (could be specify by users, format: a data.frame with colnames: rsid, a1, a2, chr, z)</span></span>
 <span><span class="va">chr</span> <span class="op">=</span> <span class="fl">22</span></span>
@@ -112,14 +104,15 @@
 <span><span class="co">### remember to change the path to the downloaded folder!!!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'./gtex_v8_mtwas_eqtls/twas_bim_chr'</span>, <span class="va">chr</span>, <span class="st">'.RData'</span><span class="op">)</span><span class="op">)</span>  <span class="co">## load twas bim files (downloaded)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'./gtex_v8_mtwas_eqtls/'</span>, <span class="va">cell_type</span>, <span class="st">'/twas_eqtl_chr'</span>, <span class="va">chr</span>, <span class="st">'.RData'</span><span class="op">)</span><span class="op">)</span> <span class="co">## load twas eqtl files (downloaded)</span></span>
-<span><span class="va">results</span> <span class="op">=</span> <span class="fu">run_mtwas_easy</span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_bim</span>, <span class="va">twas_eqtl</span><span class="op">)</span></span>
+<span><span class="va">results</span> <span class="op">=</span> <span class="fu"><a href="reference/run_mtwas_easy.html">run_mtwas_easy</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_bim</span>, <span class="va">twas_eqtl</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
-<h2 id="id_2-train-your-own-weights">2. Train your own weights<a class="anchor" aria-label="anchor" href="#id_2-train-your-own-weights"></a>
+<h2 id="two-train-your-own-weights">
+<span class="emoji" data-emoji="two">2️⃣</span> Train your own weights<a class="anchor" aria-label="anchor" href="#two-train-your-own-weights"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load TWAS data</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"twas_data"</span><span class="op">)</span></span>
@@ -130,7 +123,7 @@
 <div class="section level3">
 <h3 id="extract-cross-tissue-eqtls">Extract cross-tissue eQTLs<a class="anchor" aria-label="anchor" href="#extract-cross-tissue-eqtls"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_name</span> <span class="op">=</span> <span class="st">'CCT8L2'</span> <span class="co">## gene name</span></span>
 <span><span class="va">gene_index</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ct.eQTL</span><span class="op">)</span><span class="op">==</span><span class="va">gene_name</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ct.eQTL</span><span class="op">[[</span><span class="va">gene_index</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
@@ -138,7 +131,7 @@
 <div class="section level3">
 <h3 id="extract-tissue-specific-eqtls">Extract tissue-specific eQTLs<a class="anchor" aria-label="anchor" href="#extract-tissue-specific-eqtls"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_name</span> <span class="op">=</span> <span class="st">'CCT8L2'</span> <span class="co">## gene name</span></span>
 <span><span class="va">gene_index</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ct.eQTL</span><span class="op">)</span><span class="op">==</span><span class="va">gene_name</span><span class="op">)</span></span>
 <span><span class="va">tissue_index</span> <span class="op">=</span> <span class="fl">1</span></span>
@@ -147,7 +140,7 @@
 <div class="section level3">
 <h3 id="gene-trait-association-tests">Gene-trait association tests<a class="anchor" aria-label="anchor" href="#gene-trait-association-tests"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"summary_stats"</span><span class="op">)</span></span>
 <span><span class="co"># association test</span></span>
