@@ -7,7 +7,7 @@ Authors@R: c(
     person("Shuang", "Song", email = "song-s19@mails.tsinghua.edu.cn", role = c("aut")))
 Description: Partitioning and aggregating cross-tissue and 
     tissue-specific genetic effects in identifying gene-trait associations.
-License: GPL (>= 3)
+License: MIT + file LICENSE
 URL: https://github.com/szcf-weiya/MTWAS
 BugReports: https://github.com/szcf-weiya/MTWAS/issues
 Encoding: UTF-8

@@ -5,6 +5,13 @@ MTWAS is an R package for the paper
 > Song, S., Wang, L., Hou, L., & Liu, J. S. (2023). Partitioning and aggregating cross-tissue and tissue-specific
 genetic effects in identifying gene-trait associations.
 
+## :white_check_mark: Prerequisites
+
+The software is developed and tested in Linux and Windows environments.
+
+- R (>=3.6)
+- GNU Scientific Library (GSL) (>=2.3)
+
 ## :hammer_and_wrench: Installation
 
 ```r
