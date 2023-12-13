@@ -4,6 +4,8 @@
 #' @param E.info data.frame with columns: chr, start, end, pos
 #' @return standard mtwas data format
 #' @import GenomicRanges
+#' @import IRanges
+#' @import GenomeInfoDb
 #' @export
 format_twas_dat <- function(dat, E, E.info){
   #### pre-check
@@ -75,6 +77,8 @@ format_twas_dat <- function(dat, E, E.info){
 #' @param df2 data.frame 2
 #' @return matched index
 #' @import GenomicRanges
+#' @import IRanges
+#' @import GenomeInfoDb
 find.index <- function(df1,df2,type='reg'){
   #colnames(df1) <- colnames(df2) <- c('V1','V2','V3')
   #library(GenomicRanges)
