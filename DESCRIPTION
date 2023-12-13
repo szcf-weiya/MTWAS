@@ -11,12 +11,12 @@ License: MIT + file LICENSE
 URL: https://github.com/szcf-weiya/MTWAS
 BugReports: https://github.com/szcf-weiya/MTWAS/issues
 Encoding: UTF-8
+biocViews:
 Imports:
     Rcpp (>= 0.12.12),
     propagate,
     parallel,
     missForest
-biocViews:
     GenomicRanges
 LinkingTo: Rcpp, RcppGSL
 LazyData: true
