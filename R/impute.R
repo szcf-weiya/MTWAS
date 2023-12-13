@@ -68,10 +68,14 @@ format_twas_dat <- function(dat, E, E.info){
 }
 
 
-
+#' match index 
+#' @param df1 data.frame 1
+#' @param df2 data.frame 2
+#' @return matched index
+#' @import GenomicRanges
 find.index <- function(df1,df2,type='reg'){
   #colnames(df1) <- colnames(df2) <- c('V1','V2','V3')
-  library(GenomicRanges)
+  #library(GenomicRanges)
   df1.gr = GRanges (IRanges(start = df1$V2, end = df1$V3), seqnames=df1$V1) 
   if(type=='reg'){
     df2.gr = GRanges(IRanges(start=df2$V2, end = df2$V3), seqnames = df2$V1) 
