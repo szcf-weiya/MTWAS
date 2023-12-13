@@ -43,7 +43,7 @@ cell_type = 'Whole_Blood'
 ### remember to change the path to the downloaded folder!!!
 load(paste0('./gtex_v8_mtwas_eqtls/twas_bim_chr', chr, '.RData'))  ## load twas bim files (downloaded)
 load(paste0('./gtex_v8_mtwas_eqtls/', cell_type, '/twas_eqtl_chr', chr, '.RData')) ## load twas eqtl files (downloaded)
-results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl)
+results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl) ## MTWAS summary statistics
 head(results)
 ```
 
