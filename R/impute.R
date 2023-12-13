@@ -38,7 +38,7 @@ format_twas_dat <- function(dat, E, E.info){
     }
   }
   temp <- list(E=E.eachgene)
-  E.eachgene.imp <- impute.E(E.eachgene)$imp
+  E.eachgene.imp <- impute.E(temp)$imp
   ### 
   E <- list()
   for(k in 1:ntissue){
