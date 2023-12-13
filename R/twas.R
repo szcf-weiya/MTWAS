@@ -67,6 +67,9 @@ twas.single.trait = function(stats, x, list.ts.eQTL) {
     cat("Try to read summary statistics from ", stats, "\n")
     stats = read.table(stats, header = T)
   }
+  if(is.null(names(x$E))){
+    names(x$E) <- paste0('tissue',1:length(x$E))
+  }
   ntissue = length(list.ts.eQTL)
   ngene = length(x$pos)
   z_all <- p_all <- matrix(0, nrow = ngene, ncol = ntissue)
