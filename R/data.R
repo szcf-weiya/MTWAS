@@ -6,3 +6,6 @@
 #' Demo summary statistics
 #' @format ## `summary_stats`
 "summary_stats"
+
+
+"demo"
