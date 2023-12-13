@@ -70,9 +70,9 @@ In order to derive your own MTWAS weights, three types of data are necessary. Th
 ```r
 library(MTWAS)
 data('demo')
-demo$dat
-demo$E.info
-demo$E
+# demo$dat
+# demo$E.info
+# demo$E
 ```
 
 #### (1) Genotype files (dat)
