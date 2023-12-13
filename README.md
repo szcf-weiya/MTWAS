@@ -22,7 +22,7 @@ devtools::install_github("szcf-weiya/MTWAS")
 
  :smiley: You could either download the pre-trained GTEx v8 MTWAS weights, or generate your own files!
 
-## :one: Run MTWAS with pre-trained GTEx v8 weights (Recommended)
+## :one: Run MTWAS with pre-trained GTEx v8 weights (:star:Easy and Recommended)
 
 ### Download the pre-trained files:
 
@@ -51,9 +51,12 @@ data("summary_stats") ## EXAMPLE GWAS summary stats (could be specified by users
 chr = 22
 cell_type = 'Whole_Blood'
 ### remember to change the path to the downloaded folder!!!
-load(paste0('./gtex_v8_mtwas_eqtls/twas_bim_chr', chr, '.RData'))  ## load twas bim files (downloaded)
-load(paste0('./gtex_v8_mtwas_eqtls/', cell_type, '/twas_eqtl_chr', chr, '.RData')) ## load twas eqtl files (downloaded)
-results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl) ## MTWAS summary statistics
+## load twas bim files (downloaded)
+load(paste0('./gtex_v8_mtwas_eqtls/twas_bim_chr', chr, '.RData'))  
+## load twas eqtl files (downloaded)
+load(paste0('./gtex_v8_mtwas_eqtls/', cell_type, '/twas_eqtl_chr', chr, '.RData'))
+## Run mtwas and derive the gene-trait association test statistics
+results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl) 
 head(results)
 ```
 
@@ -113,8 +116,9 @@ The orders of the columns and rows of the matrices are not necessary to be the s
 ### Data imputation and formatting
 ```r
 library(MTWAS)
-data('demo') 
-twas_dat <- format_twas_dat(E=demo$E, E.info=demo$E.info, dat=demo$dat) ### substitute the input with your own dataset
+data('demo')
+### substitute the input with your own dataset
+twas_dat <- format_twas_dat(E=demo$E, E.info=demo$E.info, dat=demo$dat) 
 names(twas_dat)
 ```
 
