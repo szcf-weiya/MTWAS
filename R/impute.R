@@ -3,6 +3,7 @@
 #' @param E original gene expression matrix (list), the length of the list is the number of tissues,  each element is a sample*gene matrix, rownames are sample id, colnames are gene id
 #' @param E.info data.frame with columns: chr, start, end, pos
 #' @return standard mtwas data format
+#' @import GenomicRanges
 #' @export
 format_twas_dat <- function(dat, E, E.info){
   #### pre-check
