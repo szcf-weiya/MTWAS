@@ -123,9 +123,9 @@ names(twas_dat)
 ```r
 # load TWAS data
 # select cross-tissue eQTLs
-ct.eQTL = select.ct.eQTL(twas_data, verbose = F, ncores = 1)
+ct.eQTL = select.ct.eQTL(twas_dat, verbose = F, ncores = 1)
 # select tissue-specific eQTLs
-list.ts.eQTL = select.ts.eQTL(twas_data, ct.eQTL = ct.eQTL, ncores = 1)
+list.ts.eQTL = select.ts.eQTL(twas_dat, ct.eQTL = ct.eQTL, ncores = 1)
 ```
 
 ### Extract cross-tissue eQTLs
@@ -151,7 +151,7 @@ print(list.ts.eQTL[[tissue_index]][[gene_index]]$single.snp)
 # load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)
 data("summary_stats")
 # association test
-twas.single.trait(summary_stats, twas_data, list.ts.eQTL)
+twas.single.trait(summary_stats, twas_dat, list.ts.eQTL)
 ```
 
 Data formats and function details: https://hohoweiya.xyz/MTWAS/articles/mtwas.html
