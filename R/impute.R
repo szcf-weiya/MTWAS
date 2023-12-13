@@ -1,11 +1,8 @@
-#' Data preparation 
+#' Data preparation
 #' @param dat plink bfile
 #' @param E original gene expression matrix (list), the length of the list is the number of tissues,  each element is a sample*gene matrix, rownames are sample id, colnames are gene id
 #' @param E.info data.frame with columns: chr, start, end, pos
 #' @return standard mtwas data format
-#' @import GenomicRanges
-#' @import IRanges
-#' @import GenomeInfoDb
 #' @export
 format_twas_dat <- function(dat, E, E.info){
   #### pre-check
@@ -28,8 +25,8 @@ format_twas_dat <- function(dat, E, E.info){
   E.info <- E.info[match(gene_use,E.info$gene),]
   dat$bed <- dat$bed[match(sam_use,dat$fam$V2),]
   dat$fam <- dat$fam[match(sam_use,dat$fam$V2),]
-  
-  
+
+
   #### 0. imputation for each gene
   E.eachgene <- list()
   for(l in 1:length(gene_use)){
@@ -37,12 +34,12 @@ format_twas_dat <- function(dat, E, E.info){
     for(k in 1:ntissue){
       E.eachgene[[l]][,k] <- E0[[k]][match(sam_use,rownames(E0[[k]])),
                                      which(colnames(E0[[k]])==gene_use[l])]
-      
+
     }
   }
   temp <- list(E=E.eachgene)
   E.eachgene.imp <- (impute.E(temp)$imp)$E
-  ### 
+  ###
   E <- list()
   for(k in 1:ntissue){
     E[[k]] <-  matrix(NA,nrow=length(sam_use),ncol=length(gene_use))
@@ -58,11 +55,11 @@ format_twas_dat <- function(dat, E, E.info){
   colnames(exp1) <- c('V1','V2','V3','gene')
   exp1$V2 <- pmax(0,exp1$V2-1e6) ## cis SNPs
   exp1$V3 <- exp1$V3+1e6
-  
+
   ind <- find.index(exp1,dat$bim,type='pos')
-  
+
   pos <- lapply(1:length(gene_use),function(x){return(ind$df2[which(ind$df1==x)])}) ##length: # genes
-  
+
   twas_data <- list()
   twas_data$E <- E
   twas_data$E.info <- E.info
@@ -72,22 +69,21 @@ format_twas_dat <- function(dat, E, E.info){
 }
 
 
-#' match index 
+#' match index
 #' @param df1 data.frame 1
 #' @param df2 data.frame 2
+#' @param type type
 #' @return matched index
-#' @import GenomicRanges
-#' @import IRanges
-#' @import GenomeInfoDb
+#' @importFrom GenomicRanges GRanges GNCList findOverlaps
+#' @importFrom IRanges IRanges
 find.index <- function(df1,df2,type='reg'){
   #colnames(df1) <- colnames(df2) <- c('V1','V2','V3')
-  #library(GenomicRanges)
-  df1.gr = GRanges (IRanges(start = df1$V2, end = df1$V3), seqnames=df1$V1) 
+  df1.gr = GRanges (IRanges(start = df1$V2, end = df1$V3), seqnames=df1$V1)
   if(type=='reg'){
-    df2.gr = GRanges(IRanges(start=df2$V2, end = df2$V3), seqnames = df2$V1) 
+    df2.gr = GRanges(IRanges(start=df2$V2, end = df2$V3), seqnames = df2$V1)
   }
   if(type=='pos'){
-    df2.gr = GRanges(IRanges(start=df2$V4, end = df2$V4), seqnames = df2$V1) 
+    df2.gr = GRanges(IRanges(start=df2$V4, end = df2$V4), seqnames = df2$V1)
   }
   df1.git  = GNCList(df1.gr)
   df2.git  = GNCList(df2.gr)

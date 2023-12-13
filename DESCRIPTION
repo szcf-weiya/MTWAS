@@ -11,15 +11,13 @@ License: MIT + file LICENSE
 URL: https://github.com/szcf-weiya/MTWAS
 BugReports: https://github.com/szcf-weiya/MTWAS/issues
 Encoding: UTF-8
-biocViews:
 Imports:
     Rcpp (>= 0.12.12),
     propagate,
     parallel,
     missForest,
     GenomicRanges,
-    IRanges,
-    GenomeInfoDb
+    IRanges
 LinkingTo: Rcpp, RcppGSL
 LazyData: true
 RoxygenNote: 7.2.3
@@ -30,4 +28,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)

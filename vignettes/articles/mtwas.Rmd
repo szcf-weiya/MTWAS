@@ -22,14 +22,6 @@ data("twas_data")
 str(twas_data)
 ```
 
-If there are missing values in the list of expression matrix, we conduct an imputation step. As an illustration, we set some entries as `NA`, and impute them.
-
-```{r}
-twas_data.miss = twas_data
-twas_data.miss$E[[1]][c(1, 3), 1] = NA
-twas_data.imp = impute.E(twas_data.miss)$imp
-```
-
 ## Step 1: Train Weights
 
 Firstly, detect cross-tissue eQTLs,

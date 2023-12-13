@@ -32,6 +32,7 @@ tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
 ```
 
 ### Prepare the GWAS summary statistics in the following format (including the header line):
+
 ```
    chr        rsid      a1    a2       z         
     1      rs4040617    G     A     -0.199    
@@ -160,4 +161,4 @@ data("summary_stats")
 twas.single.trait(summary_stats, twas_dat, list.eQTL)
 ```
 
-Data formats and function details: https://hohoweiya.xyz/MTWAS/articles/mtwas.html
+The details of output and data formats can be found in the auto-generated vignette: https://hohoweiya.xyz/MTWAS/articles/mtwas.html

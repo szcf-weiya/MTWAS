@@ -7,5 +7,6 @@
 #' @format ## `summary_stats`
 "summary_stats"
 
-
+#' Demo original dataset
+#' @format ## `demo`
 "demo"
