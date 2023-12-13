@@ -37,6 +37,7 @@ format_twas_dat <- function(dat, E, E.info){
       
     }
   }
+  temp <- list(E=E.eachgene)
   E.eachgene.imp <- impute.E(E.eachgene)$imp
   ### 
   E <- list()
