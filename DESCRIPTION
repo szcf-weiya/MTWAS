@@ -17,7 +17,9 @@ Imports:
     propagate,
     parallel,
     missForest,
-    GenomicRanges
+    GenomicRanges,
+    IRanges,
+    GenomeInfoDb
 LinkingTo: Rcpp, RcppGSL
 LazyData: true
 RoxygenNote: 7.2.3
