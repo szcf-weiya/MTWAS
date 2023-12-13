@@ -115,6 +115,7 @@ The orders of the columns and rows of the matrices are not necessary to be the s
 library(MTWAS)
 data('demo') 
 twas_dat <- format_twas_dat(E=demo$E, E.info=demo$E.info, dat=demo$dat) ### substitute the input with your own dataset
+names(twas_dat)
 ```
 
 ### Model training
