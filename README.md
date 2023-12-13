@@ -125,15 +125,16 @@ names(twas_dat)
 # select cross-tissue eQTLs
 ct.eQTL = select.ct.eQTL(twas_dat, verbose = F, ncores = 1)
 # select tissue-specific eQTLs
-list.ts.eQTL = select.ts.eQTL(twas_dat, ct.eQTL = ct.eQTL, ncores = 1)
+list.eQTL = select.ts.eQTL(twas_dat, ct.eQTL = ct.eQTL, ncores = 1)
 ```
 
 ### Extract cross-tissue eQTLs
 
 ```r
-gene_name = 'CCT8L2' ## gene name
+gene_name = 'IL17RA' ## gene name
 gene_index = which(names(ct.eQTL)==gene_name)
-print(ct.eQTL[[gene_index]])
+## ct-eQTLs for gene IL17RA
+print(list.eQTL[[1]][[gene_index]]$`common.snp`) 
 ```
 
 ### Extract tissue-specific eQTLs
@@ -141,8 +142,9 @@ print(ct.eQTL[[gene_index]])
 ```r
 gene_name = 'CCT8L2' ## gene name
 gene_index = which(names(ct.eQTL)==gene_name)
-tissue_index = 1
-print(list.ts.eQTL[[tissue_index]][[gene_index]]$single.snp)
+tissue_index = 1 ## tissue specific
+## ts-eQTLs for gene CCT8L2 on tissue 1
+print(list.eQTL[[tissue_index]][[gene_index]]$`single.snp`)
 ```
 
 ### Gene-trait association tests
@@ -151,7 +153,7 @@ print(list.ts.eQTL[[tissue_index]][[gene_index]]$single.snp)
 # load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)
 data("summary_stats")
 # association test
-twas.single.trait(summary_stats, twas_dat, list.ts.eQTL)
+twas.single.trait(summary_stats, twas_dat, list.eQTL)
 ```
 
 Data formats and function details: https://hohoweiya.xyz/MTWAS/articles/mtwas.html
