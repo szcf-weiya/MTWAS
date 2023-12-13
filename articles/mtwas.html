@@ -75,11 +75,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'IRanges::cor' by 'stats::cor' when loading</span></span>
-<span><span class="co">#&gt; 'MTWAS'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'IRanges::cov' by 'stats::cov' when loading</span></span>
-<span><span class="co">#&gt; 'MTWAS'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="step-0-data-preparation">Step 0: Data Preparation<a class="anchor" aria-label="anchor" href="#step-0-data-preparation"></a>
 </h2>
@@ -133,19 +129,12 @@ types).</p>
 <span><span class="co">#&gt;   ..$ : int [1:7] 1 2 3 4 5 6 7</span></span>
 <span><span class="co">#&gt;   ..$ : int [1:37] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
 <span><span class="co">#&gt;   ..$ : int [1:509] 1 2 3 4 5 6 7 8 9 10 ...</span></span></code></pre></div>
-<p>If there are missing values in the list of expression matrix, we
-conduct an imputation step. As an illustration, we set some entries as
-<code>NA</code>, and impute them.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">twas_data.miss</span> <span class="op">=</span> <span class="va">twas_data</span></span>
-<span><span class="va">twas_data.miss</span><span class="op">$</span><span class="va">E</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span></span>
-<span><span class="va">twas_data.imp</span> <span class="op">=</span> <span class="fu"><a href="../reference/impute.E.html">impute.E</a></span><span class="op">(</span><span class="va">twas_data.miss</span><span class="op">)</span><span class="op">$</span><span class="va">imp</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-1-train-weights">Step 1: Train Weights<a class="anchor" aria-label="anchor" href="#step-1-train-weights"></a>
 </h2>
 <p>Firstly, detect cross-tissue eQTLs,</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ct.eQTL</span> <span class="op">=</span> <span class="fu"><a href="../reference/select.ct.eQTL.html">select.ct.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, verbose <span class="op">=</span> <span class="cn">F</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">ct.eQTL</span></span>
 <span><span class="co">#&gt; $OR11H1</span></span>
@@ -158,7 +147,7 @@ conduct an imputation step. As an illustration, we set some entries as
 <span><span class="co">#&gt; numeric(0)</span></span></code></pre></div>
 <p>One can specify <code>ncores</code> for parallel computing.</p>
 <p>Then fix those ct.eQTLs, and select the tissue-specific eQTLs,</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">list.ts.eQTL</span> <span class="op">=</span> <span class="fu"><a href="../reference/select.ts.eQTL.html">select.ts.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, ct.eQTL <span class="op">=</span> <span class="va">ct.eQTL</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">list.ts.eQTL</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
@@ -485,14 +474,14 @@ conduct an imputation step. As an illustration, we set some entries as
 <span><span class="co">#&gt; character(0)</span></span></code></pre></div>
 <p>By default, it returns the list of ts-eQTLs for each tissue. You can
 also specify the index of tissue to get the corresponding ts-eQTL,</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/select.ts.eQTL.html">select.ts.eQTL</a></span><span class="op">(</span><span class="va">twas_data</span>, ct.eQTL <span class="op">=</span> <span class="va">ct.eQTL</span>, ncores <span class="op">=</span> <span class="fl">1</span>, id.tissue <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-2-association-test">Step 2: Association Test<a class="anchor" aria-label="anchor" href="#step-2-association-test"></a>
 </h2>
 <p>Load GWAS summary statistics for some phenotype</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"summary_stats"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">summary_stats</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    1000 obs. of  5 variables:</span></span>
@@ -503,7 +492,7 @@ also specify the index of tissue to get the corresponding ts-eQTL,</p>
 <span><span class="co">#&gt;  $ z   : num  0.584 0.638 0.857 0.835 0.29 ...</span></span></code></pre></div>
 <p>Then perform an association test in a tissue-specific manner to
 retain the tissue specificity of the trait-gene associations.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/twas.single.trait.html">twas.single.trait</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_data</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $zstat</span></span>
 <span><span class="co">#&gt;           tissue1   tissue2   tissue3   tissue4   tissue5</span></span>
@@ -518,11 +507,11 @@ retain the tissue specificity of the trait-gene associations.</p>
 <span><span class="co">#&gt; CCT8L2 0.9626716 0.2684756 0.01206184 0.4252193 0.35262122</span></span></code></pre></div>
 <p>Alternatively, one can pass a file name to the summary
 statistics,</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/twas.single.trait.html">twas.single.trait</a></span><span class="op">(</span><span class="va">twas_data</span>, <span class="st">"/tmp/gwas_summary_stats.txt"</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span></code></pre></div>
 <p>For multiple traits, one can pass a list of summary statistics or
 files, e.g.,</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">twas.multiple.trait</span><span class="op">(</span><span class="va">twas_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"/tmp/trait"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="st">"_gwas_summary_stats.txt"</span><span class="op">)</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
