@@ -52,7 +52,7 @@ format_twas_dat <- function(dat, E, E.info){
     colnames(E[[k]]) <- gene_use
     rownames(E[[k]]) <- sam_use
   }
-  
+  names(E) <- names(E0)
   #### format
   exp1 <- E.info[,c('chr','start','end','gene')]
   colnames(exp1) <- c('V1','V2','V3','gene')
