@@ -16,7 +16,7 @@ Imports:
     Rcpp (>= 0.12.12),
     propagate,
     parallel,
-    missForest
+    missForest,
     GenomicRanges
 LinkingTo: Rcpp, RcppGSL
 LazyData: true
