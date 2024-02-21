@@ -271,7 +271,7 @@ Rcpp::List soda_main_allback(const RcppGSL::Matrix &xx, const RcppGSL::Vector &y
         set_difference(set_all.begin(), set_all.end(), cur_set.begin(), cur_set.end(),
                                                 inserter(not_set, not_set.begin()));
         int Nnset = not_set.size();
-        if (Nnset == 0)  // n_ops == 0
+        if (Nnset == 0 || cur_set.size() >= ((yy.size())/5))  // n_ops == 0
             break;
         vector<int> new_set = cur_set; // does not change cur_set (https://cplusplus.com/reference/vector/vector/operator=/)
         new_set.push_back(-1);
