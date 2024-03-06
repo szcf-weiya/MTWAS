@@ -107,11 +107,11 @@ Format: a **data.frame** in the following format (including the header line):
 
 A **list** including all the **gene expression data**, the length of the list is the number of tissues. Each element is a sample*gene matrix. 
 
-Each matrix should have **rownames** (overlapped with dat$fam$V2), and **colnames** (overlapped with E.info$gene)
+Each matrix should have **rownames** (overlapped with `dat$fam$V2`), and **colnames** (overlapped with `E.info$gene`)
 
 The orders of the columns and rows of the matrices are not necessary to be the same. The matrices can have NAs.
 
-:exclamation: Please NOTE that the position of dat$bim$V4 and E.info should be the same build (e.g., both are hg19, or hg38, or etc.)
+:exclamation: Please NOTE that the position of `dat$bim$V4` and `E.info` should be the same build (e.g., both are hg19, or hg38, or etc.)
 
 
 ### Data imputation and formatting
