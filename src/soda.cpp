@@ -243,6 +243,10 @@ Rcpp::List soda_main_allback(const RcppGSL::Matrix &xx, const RcppGSL::Vector &y
                              double gam = 0, int minF0 = 3,
                              bool allow_empty = false) {
     int N = xx.nrow(), D = xx.ncol();
+    int Ny = yy.size();
+    if (N != Ny) {
+        stop("The dimension of x (nrow = %i) and y (length = %i) should be matched.", N, Ny);
+    }
     minF0 = min(D, minF0);
     vector<double> BICs;
     vector<int> terms = fixset;
@@ -400,10 +404,7 @@ Rcpp::List soda_main_allback(const RcppGSL::Matrix &xx, const RcppGSL::Vector &y
 }
 
 /*** R
-# system.time(
-# for (i in 1:20)
-#     #print(soda_main_allback(xx0[[i]], yy0[[i]], colnames(xx0[[i]]), FALSE, FALSE, 1, 3))
-#     soda_main_allback(xx0[[i]], yy0[[i]], colnames(xx0[[i]]), FALSE, FALSE, 1, 3)
-# )
-# soda_main_allback(train.x, train.y, 1:ncol(train.x), numeric(0), FALSE, FALSE, 1, 16)
+# x = matrix(rnorm(1000), nrow = 100)
+# y = rnorm(100)
+# soda_main_allback(x, y, 1:ncol(x), numeric(0), FALSE, FALSE, 1, 16)
 */

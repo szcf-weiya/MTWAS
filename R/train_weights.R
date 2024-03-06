@@ -100,12 +100,12 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
                                  verbose = TRUE,
                                  allow_empty = TRUE){
   if (length(pos[[j]]) > 0){
-    xx <- (as.matrix(dat$bed[,pos[[j]]]))
+    xx <- (as.matrix(dat$bed[, pos[[j]]]))
     #yy <- E[,j]
     ### to remove the SNP with maf<0.05 in tissue-specific dataset
     ind0 <- 1:ncol(xx)
     train.ind <- 1:nrow(xx)
-    if(length(ind0)>1){
+    if(length(ind0) > 1){
       # dat <- list(xx=xx,yy=yy)
       # load(paste0(paste0('./dat/chr',chr,'/dat_',j,'.RData')))
       # if(scale){
@@ -115,7 +115,7 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
       #   test.y <- scale(yy[test.tissue.ind])
       # }else{
       #train.x <- (xx[train.ind,])
-      train.x <- t(t(xx[train.ind,])-apply(xx[train.ind,],2,mean))
+      train.x <- t(t(xx[train.ind,]) - apply(xx[train.ind,], 2, mean))
       #train.y <- (yy[train.ind])
       #test.x <- (xx[test.ind,])
       #test.y <- (yy[test.tissue.ind])
@@ -127,13 +127,13 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
       if(T){
         for(l in 1:length(kct.all)){
           if(l==1){
-            yy0 <- E[[kct.all[l]]][train.ind,j]
+            yy0 <- E[[kct.all[l]]][train.ind, j]
           }else{
-            yy0 <- cbind(yy0,E[[kct.all[l]]][train.ind,j])
+            yy0 <- cbind(yy0,E[[kct.all[l]]][train.ind, j])
           }
         }
       }
-      if(length(which(is.na(yy0[1,])))>0){
+      if(length(which(is.na(yy0[1, ]))) > 0){
         yy0 <- yy0[,-which(is.na(yy0[1,]))]
       }
       temp <- prcomp(yy0)
@@ -143,13 +143,13 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
       i <- 1
       fixset <- numeric(0)
 
-      while(i<6){
-        pca.var <- pca.var+PoV[i]
+      while(i < 6){
+        pca.var <- pca.var + PoV[i]
         yy <- yy.pca[,i]
-        train.y <- (yy)-mean(yy)
+        train.y <- (yy) - mean(yy)
         #test.x[is.na(test.x)] <- 0
         #test.x[is.nan(test.x)] <- 0
-        model <- soda_main_allback(train.x,train.y, colnames(train.x),
+        model <- soda_main_allback(train.x, train.y, colnames(train.x),
                                    fixset = fixset, FALSE, verbose, gam, nF0, allow_empty)
         fixset <- unique(c(fixset,model$`Select Set`))
         i <- i+1
