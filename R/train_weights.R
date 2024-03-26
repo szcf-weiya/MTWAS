@@ -143,7 +143,7 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
       i <- 1
       fixset <- numeric(0)
 
-      while(i < 6){
+      while(i < (sum(temp$sdev^2 >=2)+1)){
         pca.var <- pca.var + PoV[i]
         yy <- yy.pca[,i]
         train.y <- (yy) - mean(yy)
@@ -275,6 +275,7 @@ soda_model_imp_single <- function(j, fix, E, dat, pos, gam = 1, scale = F, nF0 =
           #model$final_Term
           soda.train <- data.frame(V1=train.y, create_pmatrix_from_terms(train.x,   res$best_term))
           # soda.test <- data.frame(V1=test.y, create_pmatrix_from_terms(test.x,   res$best_term))
+          weight <- rep(1,nrow(soda.train))
           tt <- stats::lm(V1~.,data=soda.train)
           res$coef <- coef(tt)
           res$single <- setdiff(res$best_term,fix[[j]])
