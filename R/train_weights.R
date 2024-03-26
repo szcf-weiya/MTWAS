@@ -106,20 +106,7 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
     ind0 <- 1:ncol(xx)
     train.ind <- 1:nrow(xx)
     if(length(ind0) > 1){
-      # dat <- list(xx=xx,yy=yy)
-      # load(paste0(paste0('./dat/chr',chr,'/dat_',j,'.RData')))
-      # if(scale){
-      #   train.x <- scale(xx[train.ind,])
-      #   train.y <- scale(yy[train.ind])
-      #   test.x <- scale(xx[test.tissue.ind,])
-      #   test.y <- scale(yy[test.tissue.ind])
-      # }else{
-      #train.x <- (xx[train.ind,])
       train.x <- t(t(xx[train.ind,]) - apply(xx[train.ind,], 2, mean))
-      #train.y <- (yy[train.ind])
-      #test.x <- (xx[test.ind,])
-      #test.y <- (yy[test.tissue.ind])
-      #}
       train.x[is.na(train.x)] <- 0
       train.x[is.nan(train.x)] <- 0
 
@@ -154,11 +141,6 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
         fixset <- unique(c(fixset,model$`Select Set`))
         i <- i+1
       }
-      # fn <- paste0('')
-      # fn.share <- paste0('/home/songs/gtex/joint_tissue_all/test_hm3/all_tissue/res_soda_linear/chr',
-      #                    chr,'/soda_linear_cv',cv,'_gam',gam0,'_nF0',nF0,'_share.RData')
-      #
-      #fn.share <- paste0(path,'/soda_linear_cv',cv,'_gam',gam0,'_nF0',nF0,'_share.RData')
       return(fixset)
     }
   }
@@ -180,10 +162,11 @@ select.ts.eQTL = function(x, ct.eQTL, id.tissue = -1, ncores = 1, ...) {
   }
   if (ncores == 1) {
     soda.imp = lapply(1:nne, function(j)
-      soda_model_imp_single(j, fix = ct.eQTL, x$E[[id.tissue]], x$dat, x$pos, ...))
+      soda_model_imp_single(j, fix = ct.eQTL, x$E[[id.tissue]], x$dat, x$pos, E.imp.idx = x$E.imp.idx[[id.tissue]], ...))
   } else {
     soda.imp = mclapply(1:nne, soda_model_imp_single,
                         E = x$E[[id.tissue]], dat = x$dat, pos = x$pos,
+                        E.imp.idx = x$E.imp.idx[[id.tissue]],
                         fix = ct.eQTL, ...,
                         mc.cores=ncores, mc.preschedule =F)
   }
@@ -199,40 +182,33 @@ select.ts.eQTL = function(x, ct.eQTL, id.tissue = -1, ncores = 1, ...) {
 #' @param gam tuning parameter \eqn{\gamma} in EBIC criteria. Default is 1.
 #' @param scale whether to scale the expression and the genetic data when regressing the expression on the genetic data. Default is \code{FALSE}.
 #' @param nF0 minimum size of the set
+#' @param E.imp.idx the same dimension as E, and takes 0 or 1. If E[i, j] is imputed, then E.imp.idx[i, j] = 1.
 #' @importFrom stats coef
 #' @export
-soda_model_imp_single <- function(j, fix, E, dat, pos, gam = 1, scale = F, nF0 = 5){
+soda_model_imp_single <- function(j, fix, E, dat, pos, gam = 1, scale = F, nF0 = 5, E.imp.idx = NULL){
   fixset <- fix[[j]]
   if(length(pos[[j]])>0){
     xx <- (as.matrix(dat$bed[,pos[[j]]]))
     rsid00 <- dat$bim$V2[pos[[j]]]
     yy <- E[,j]
-    ### to remove the SNP with maf<0.05 in tissue-specific dataset
+    ### to remove the SNP with maf < 0.05 in tissue-specific dataset
     ind0 <- 1:ncol(xx)
     train.ind <- 1:nrow(xx)
-    ### to remove the SNP with maf<0.05 in tissue-specific dataset
+    ### to remove the SNP with maf < 0.05 in tissue-specific dataset
     if(length(ind0)>0){
-      # dat <- list(xx=xx,yy=yy)
-      # load(paste0(paste0('./dat/chr',chr,'/dat_',j,'.RData')))
       if(scale){
         train.x <- scale(xx[train.ind,])
         train.y <- scale(yy[train.ind])
-        # test.x <- scale(xx[test.ind,])
-        # test.y <- scale(yy[test.ind])
       }else{
         train.x <- (xx[train.ind,])
         train.y <- (yy[train.ind])
-        # test.x <- (xx[test.ind,])
-        # test.y <- (yy[test.ind])
       }
       if(all(is.na(train.y))){
         return(NA)
       }else{
         train.x[is.na(train.x)] <- 0
-        #test.x[is.na(test.x)] <- 0
         train.x[is.nan(train.x)] <- 0
-        #test.x[is.nan(test.x)] <- 0
-        if(ncol(xx)==1){
+        if(ncol(xx) == 1){
           res <- list()
           res$best_term=1
           res$coef <- coef(stats::lm(train.y~train.x))
@@ -246,37 +222,30 @@ soda_model_imp_single <- function(j, fix, E, dat, pos, gam = 1, scale = F, nF0 =
           iter <- 0
           allowempty <- T
           nfix <- length(fixset)
-          while(length(fixset)==0 || single){
-            #while(length(fixset)<=nfix || single){
+          while(length(fixset) == 0 || single){
             iter <- iter+1
             single <- F
-            # for(i in 1:1){
-            # yy <- yy0
-            # dat <- list(xx=xx,yy=yy)
-            # load(paste0(paste0('./dat/chr',chr,'/dat_',j,'.RData')))
-            #train.x <- t(t(xx)-apply(xx,2,mean))
-            #train.y <- (yy)-mean(yy)
-            if(iter==5){
+            if (iter == 5){
               allowempty <- F
             }
             model <- soda_main_allback(train.x,train.y, colnames(train.x),
                                        fixset = fixset, FALSE, FALSE, gam, nF0, allowempty)
             fixset <- unique(c(fixset,model$`Select Set`))
-            gam <- gam-0.2
+            gam <- gam - 0.2
           }
 
-          #model <- soda_main_allback(train.x, train.y,gam=gam,minF0=nF0)
           res <- list()
           res$BIC <- model$EBIC
-          #res$Var <- model$Var
-          #res$Term <- model$Term
-          #res$best_term <- model$Term[[which.min(model$BIC)]]
           res$best_term <- model$`Select Set`
-          #model$final_Term
-          soda.train <- data.frame(V1=train.y, create_pmatrix_from_terms(train.x,   res$best_term))
-          # soda.test <- data.frame(V1=test.y, create_pmatrix_from_terms(test.x,   res$best_term))
-          weight <- rep(1,nrow(soda.train))
-          tt <- stats::lm(V1~.,data=soda.train)
+          soda.train <- data.frame(V1 = train.y, create_pmatrix_from_terms(train.x, res$best_term))
+          if (!is.null(E.imp.idx)) {
+              n.obs = sum(!E.imp.idx[, j])
+              n.miss = nrow(E.imp.idx) - n.obs
+              weight = !E.imp.idx[, j]
+              weight[E.imp.idx[, j]] = min(1, n.obs / n.miss)
+          } else
+              weight <- rep(1, nrow(soda.train))
+          tt <- stats::lm(V1 ~ ., data = soda.train, weight = weight)
           res$coef <- coef(tt)
           res$single <- setdiff(res$best_term,fix[[j]])
           res$single.snp <- rsid00[res$single]

@@ -41,28 +41,32 @@ format_twas_dat <- function(dat, E, E.info){
   E.eachgene.imp <- (impute.E(temp)$imp)$E
   ###
   E <- list()
+  E.imp.idx = list()
   for(k in 1:ntissue){
-    E[[k]] <-  matrix(NA,nrow=length(sam_use),ncol=length(gene_use))
+    E[[k]] <- matrix(NA,nrow=length(sam_use),ncol=length(gene_use))
     for(l in 1:length(gene_use)){
-      E[[k]][,l] <-  E.eachgene.imp[[l]][,k]
+      E[[k]][,l] <- E.eachgene.imp[[l]][,k]
     }
     colnames(E[[k]]) <- gene_use
     rownames(E[[k]]) <- sam_use
+    E.imp.idx[[k]] = is.na(E0[[k]][match(sam_use, rownames(E0[[k]])), gene_use])
   }
   names(E) <- names(E0)
+  names(E.imp.idx) = names(E0)
   #### format
   exp1 <- E.info[,c('chr','start','end','gene')]
   colnames(exp1) <- c('V1','V2','V3','gene')
-  exp1$V2 <- pmax(0,exp1$V2-1e6) ## cis SNPs
-  exp1$V3 <- exp1$V3+1e6
+  exp1$V2 <- pmax(0, exp1$V2 - 1e6) ## cis SNPs
+  exp1$V3 <- exp1$V3 + 1e6
 
-  ind <- find.index(exp1,dat$bim,type='pos')
+  ind <- find.index(exp1, dat$bim, type = 'pos')
 
-  pos <- lapply(1:length(gene_use),function(x){return(ind$df2[which(ind$df1==x)])}) ##length: # genes
+  pos <- lapply(1:length(gene_use), function(x){ return(ind$df2[which(ind$df1 == x)]) }) ##length: # genes
 
   twas_data <- list()
   twas_data$E <- E
   twas_data$E.info <- E.info
+  twas_data$E.imp.idx = E.imp.idx
   twas_data$dat <- dat
   twas_data$pos <- pos
   return(twas_data)
