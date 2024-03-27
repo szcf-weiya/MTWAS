@@ -214,6 +214,8 @@ run_mtwas_easy <- function(stats,
   # E.info$z_g <- z_g
   # E.info$p_g <- pnorm(-abs(z_g))*2
   res <- data.frame(gene=names(twas_eqtl), z_g=z_g, p_g=pnorm(-abs(z_g))*2)
+  res <- res[order(res$p_g),]
+  colnames(res)[2:3] = c('MTWAS_Z','MWAS_P')
   if(!is.null(pred_res)){
     res$pred_r2 = pred_res$r2[match(res$gene, pred_res$gene)]
     res$pred_pv = pred_res$pv[match(res$gene, pred_res$gene)]
