@@ -5,6 +5,20 @@ MTWAS is an R package for the paper
 > Song, S., Wang, L., Hou, L., & Liu, J. S. (2023). Partitioning and aggregating cross-tissue and tissue-specific
 genetic effects in identifying gene-trait associations.
 
+
+:bulb: We provide pre-trained eQTL weights with MTWAS on 47 **GTEx version 8** tissues, 13 types of immune cells and 2 activation conditions of the **DICE** dataset, and 14 immune cell types from the single-cell RNA-seq **OneK1K** dataset.
+
+:smiley: You could either download the pre-trained MTWAS weights (easy and recommended), or generate your own files!
+
+## Table of contents
+* [Prerequisites](#white-check-mark-prerequisites)
+* [Install](#hammer_and_wrench-install)
+* [LD prepared](#rocket-getting-started)
+* [Estimation of heritability and inflation factor](#rocket-estimation-of-heritability-and-inflation-factor)
+* [Output](#bulb-output)
+* [A Simplified Pipeline](#key-a-simplified-pipeline)
+
+
 ## :white_check_mark: Prerequisites
 
 The software is developed and tested in Linux and Windows environments.
@@ -20,7 +34,6 @@ devtools::install_github("szcf-weiya/MTWAS")
 
 ## :rocket: Getting Started
 
- :smiley: You could either download the pre-trained GTEx v8 MTWAS weights, or generate your own files!
 
 ## :one: Run MTWAS with pre-trained GTEx v8 weights (:star:Easy and Recommended)
 
