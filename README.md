@@ -2,7 +2,7 @@
 
 MTWAS is an R package for the paper
 
-> Song, S., Wang, L., Hou, L., & Liu, J. S. (2023). Partitioning and aggregating cross-tissue and tissue-specific
+> Song, S., Wang, L., Hou, L., & Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific
 genetic effects in identifying gene-trait associations.
 
 
@@ -187,3 +187,21 @@ twas.single.trait(summary_stats, twas_dat, list.eQTL)
 ```
 
 The details of output and data formats can be found in the auto-generated vignette: https://hohoweiya.xyz/MTWAS/articles/mtwas.html
+
+## References
+**MTWAS software**
+> Song, S., Wang, L., Hou, L., & Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific
+genetic effects in identifying gene-trait associations.
+
+**The GTEx dataset**
+> https://gtexportal.org/home/
+
+**The DICE dataset**
+> https://dice-database.org/
+
+> Schmiedel, Benjamin J., et al. "Impact of genetic polymorphisms on human immune cell gene expression." Cell 175.6 (2018): 1701-1715.
+
+**The OneK1K dataset**
+> https://onek1k.org/
+
+> Yazar, Seyhan, et al. "Single-cell eQTL mapping identifies cell type–specific genetic control of autoimmune disease." Science 376.6589 (2022): eabf3041.
