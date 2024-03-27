@@ -158,8 +158,9 @@ twas.res <- function(stats, soda.all.imp,
 
 #' Run association test with downloaded trained data
 #' @param stats summary statistics for a phenotype. It can be a filename to be read or a data.frame, should include columns rsid, ref, alt, chr, z
-#' @param twas_bim pre-downloaded file 
-#' @param twas_eqtl pre-downloaded file 
+#' @param twas_bim pre-downloaded file (match SNP)
+#' @param twas_eqtl pre-downloaded file (trained models)
+#' @param pred_res pre-downloaded file (prediction accuracy of the expression levels)
 #' @return mtwas summary statistics
 #' @importFrom propagate cor2cov
 #' @importFrom stats cov cov2cor pnorm prcomp
@@ -167,7 +168,7 @@ twas.res <- function(stats, soda.all.imp,
 run_mtwas_easy <- function(stats,
                            twas_bim,
                            #E.info,
-                           twas_eqtl){
+                           twas_eqtl, pred_res=NULL){
   twas_bim$rsid = twas_bim$V2 # temporary use
   bim.order <- 1:nrow(twas_bim) ## change to rsid
   stats <- stats[!duplicated(stats$rsid),]
@@ -212,7 +213,11 @@ run_mtwas_easy <- function(stats,
   # avoid directly modify the loaded data
   # E.info$z_g <- z_g
   # E.info$p_g <- pnorm(-abs(z_g))*2
-  res <- data.frame(gene=names(twas_eqtl),z_g=z_g,p_g=pnorm(-abs(z_g))*2)
+  res <- data.frame(gene=names(twas_eqtl), z_g=z_g, p_g=pnorm(-abs(z_g))*2)
+  if(!is.null(pred_res)){
+    res$pred_r2 = pred_res$r2[match(res$gene, pred_res$gene)]
+    res$pred_pv = pred_res$pv[match(res$gene, pred_res$gene)]
+  }
   #list(z_g = z_g, p_g = pnorm(-abs(z_g))*2)
   return(res)
 }
