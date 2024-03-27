@@ -36,7 +36,7 @@ devtools::install_github("szcf-weiya/MTWAS")
 ## :scroll: Prepare GWAS summary statistics
 Please prepare the GWAS summary statistics in the following format (including the header line):
 ```
-   chr        rsid      a1    a2       z         
+   chr        rsid     ref   alt       z         
     1      rs4040617    G     A     -0.199    
     1      rs4075116    C     T      0.646     
     1      rs9442385    T     G     -0.016    
@@ -46,9 +46,9 @@ Please prepare the GWAS summary statistics in the following format (including th
 
 **rsid**: SNP rsid
 
-**a1**: reference allele
+**ref**: reference allele
 
-**a2**: alternative allele
+**alt**: alternative allele
 
 **z**: GWAS z score
 
