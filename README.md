@@ -8,7 +8,7 @@ genetic effects in identifying gene-trait associations.
 
 :bulb: We provide pre-trained eQTL weights with MTWAS on 47 **GTEx version 8** tissues, 13 types of immune cells and 2 activation conditions of the **DICE** dataset, and 14 immune cell types from the single-cell RNA-seq **OneK1K** dataset.
 
-:smiley: You could either run MTWAS with the pre-trained MTWAS weights (:star:easy and recommended), or train your own models with the expression data!
+:smiley: You could either run MTWAS with the pre-trained weights (:star:easy and recommended), or train your own models with the expression data!
 
 ## Table of contents
 * [Prerequisites](#white_check_mark-prerequisites)
