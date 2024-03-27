@@ -70,17 +70,18 @@
 <p>Song, S., Wang, L., Hou, L., &amp; Liu, J. S. (2023). Partitioning and aggregating cross-tissue and tissue-specific genetic effects in identifying gene-trait associations.</p>
 </blockquote>
 <p><span class="emoji" data-emoji="bulb">💡</span> We provide pre-trained eQTL weights with MTWAS on 47 <strong>GTEx version 8</strong> tissues, 13 types of immune cells and 2 activation conditions of the <strong>DICE</strong> dataset, and 14 immune cell types from the single-cell RNA-seq <strong>OneK1K</strong> dataset.</p>
-<p><span class="emoji" data-emoji="smiley">😃</span> You could either download the pre-trained MTWAS weights (easy and recommended), or generate your own files!</p>
+<p><span class="emoji" data-emoji="smiley">😃</span> You could either use the pre-trained MTWAS weights (<span class="emoji" data-emoji="star">⭐</span>easy and recommended), or generate your own files!</p>
 <div class="section level2">
 <h2 id="table-of-contents">Table of contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
 </h2>
 <ul>
-<li><a href="#white-check-mark-prerequisites">Prerequisites</a></li>
-<li><a href="#hammer_and_wrench-install">Install</a></li>
-<li><a href="#rocket-getting-started">LD prepared</a></li>
-<li><a href="#rocket-estimation-of-heritability-and-inflation-factor">Estimation of heritability and inflation factor</a></li>
-<li><a href="#bulb-output">Output</a></li>
-<li><a href="#key-a-simplified-pipeline">A Simplified Pipeline</a></li>
+<li><a href="#white_check_mark-prerequisites">Prerequisites</a></li>
+<li><a href="#hammer_and_wrench-installation">Installation</a></li>
+<li><a href="#scroll-prepare-gwas-summary-statistics">Prepare GWAS summary statistics</a></li>
+<li><a href="#rocket-run-mtwas-with-pre-trained-gtex-v8-weights">Run MTWAS with pre-trained GTEx v8 weights</a></li>
+<li><a href="#rocket-run-mtwas-with-pre-trained-dice-weights">Run MTWAS with pre-trained DICE weights</a></li>
+<li><a href="#rocket-run-mtwas-with-pre-trained-onek1k-weights">Run MTWAS with pre-trained OneK1K weights</a></li>
+<li><a href="#key-train-your-own-weights">Train MTWAS with your own datasets</a></li>
 </ul>
 </div>
 <div class="section level2">
@@ -101,23 +102,10 @@
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"szcf-weiya/MTWAS"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="rocket-getting-started">
-<span class="emoji" data-emoji="rocket">🚀</span> Getting Started<a class="anchor" aria-label="anchor" href="#rocket-getting-started"></a>
+<h2 id="scroll-prepare-gwas-summary-statistics">
+<span class="emoji" data-emoji="scroll">📜</span> Prepare GWAS summary statistics<a class="anchor" aria-label="anchor" href="#scroll-prepare-gwas-summary-statistics"></a>
 </h2>
-</div>
-<div class="section level2">
-<h2 id="one-run-mtwas-with-pre-trained-gtex-v8-weights-stareasy-and-recommended">
-<span class="emoji" data-emoji="one">1️⃣</span> Run MTWAS with pre-trained GTEx v8 weights (<span class="emoji" data-emoji="star">⭐</span>Easy and Recommended)<a class="anchor" aria-label="anchor" href="#one-run-mtwas-with-pre-trained-gtex-v8-weights-stareasy-and-recommended"></a>
-</h2>
-<div class="section level3">
-<h3 id="download-the-pre-trained-files">Download the pre-trained files:<a class="anchor" aria-label="anchor" href="#download-the-pre-trained-files"></a>
-</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/<span class="pp">?</span>dl=1 <span class="at">--no-check-certificate</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> gtex_v8_mtwas_eqtls.tar.gz</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="prepare-the-gwas-summary-statistics-in-the-following-format-including-the-header-line">Prepare the GWAS summary statistics in the following format (including the header line):<a class="anchor" aria-label="anchor" href="#prepare-the-gwas-summary-statistics-in-the-following-format-including-the-header-line"></a>
-</h3>
+<p>Please prepare the GWAS summary statistics in the following format (including the header line):</p>
 <pre><code>   chr        rsid      a1    a2       z         
     1      rs4040617    G     A     -0.199    
     1      rs4075116    C     T      0.646     
@@ -128,6 +116,16 @@
 <p><strong>a1</strong>: reference allele</p>
 <p><strong>a2</strong>: alternative allele</p>
 <p><strong>z</strong>: GWAS z score</p>
+</div>
+<div class="section level2">
+<h2 id="rocket-run-mtwas-with-pre-trained-gtex-v8-weights">
+<span class="emoji" data-emoji="rocket">🚀</span> Run MTWAS with pre-trained GTEx v8 weights<a class="anchor" aria-label="anchor" href="#rocket-run-mtwas-with-pre-trained-gtex-v8-weights"></a>
+</h2>
+<div class="section level3">
+<h3 id="download-the-pre-trained-files">Download the pre-trained files:<a class="anchor" aria-label="anchor" href="#download-the-pre-trained-files"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/<span class="pp">?</span>dl=1 <span class="at">--no-check-certificate</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> gtex_v8_mtwas_eqtls.tar.gz</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mtwas-analysis">MTWAS analysis:<a class="anchor" aria-label="anchor" href="#mtwas-analysis"></a>
@@ -149,12 +147,22 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="two-train-your-own-weights">
-<span class="emoji" data-emoji="two">2️⃣</span> Train your own weights<a class="anchor" aria-label="anchor" href="#two-train-your-own-weights"></a>
+<h2 id="rocket-run-mtwas-with-pre-trained-dice-weights">
+<span class="emoji" data-emoji="rocket">🚀</span> Run MTWAS with pre-trained DICE weights<a class="anchor" aria-label="anchor" href="#rocket-run-mtwas-with-pre-trained-dice-weights"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="rocket-run-mtwas-with-pre-trained-onek1k-weights">
+<span class="emoji" data-emoji="rocket">🚀</span> Run MTWAS with pre-trained OneK1K weights<a class="anchor" aria-label="anchor" href="#rocket-run-mtwas-with-pre-trained-onek1k-weights"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="key-train-your-own-weights">
+<span class="emoji" data-emoji="key">🔑</span> Train your own weights<a class="anchor" aria-label="anchor" href="#key-train-your-own-weights"></a>
 </h2>
 <p>We also provide functions to train MTWAS with your own datasets!</p>
 <div class="section level3">
-<h3 id="data-preparation">Data preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
+<h3 id="step-1-data-preparation">Step 1: Data preparation<a class="anchor" aria-label="anchor" href="#step-1-data-preparation"></a>
 </h3>
 <p>In order to derive your own MTWAS weights, three types of data are necessary. There is a demo dataset built in our R package:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -192,7 +200,7 @@
 </div>
 </div>
 <div class="section level3">
-<h3 id="data-imputation-and-formatting">Data imputation and formatting<a class="anchor" aria-label="anchor" href="#data-imputation-and-formatting"></a>
+<h3 id="step-2-data-imputation-and-formatting">Step 2: Data imputation and formatting<a class="anchor" aria-label="anchor" href="#step-2-data-imputation-and-formatting"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
@@ -202,7 +210,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">twas_dat</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="model-training">Model training<a class="anchor" aria-label="anchor" href="#model-training"></a>
+<h3 id="step-3-model-training">Step 3: Model training<a class="anchor" aria-label="anchor" href="#step-3-model-training"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load TWAS data</span></span>
@@ -212,7 +220,7 @@
 <span><span class="va">list.eQTL</span> <span class="op">=</span> <span class="fu"><a href="reference/select.ts.eQTL.html">select.ts.eQTL</a></span><span class="op">(</span><span class="va">twas_dat</span>, ct.eQTL <span class="op">=</span> <span class="va">ct.eQTL</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="extract-cross-tissue-eqtls">Extract cross-tissue eQTLs<a class="anchor" aria-label="anchor" href="#extract-cross-tissue-eqtls"></a>
+<h3 id="step-4-extract-cross-tissue-eqtls">Step 4: Extract cross-tissue eQTLs<a class="anchor" aria-label="anchor" href="#step-4-extract-cross-tissue-eqtls"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_name</span> <span class="op">=</span> <span class="st">'IL17RA'</span> <span class="co">## gene name</span></span>
@@ -221,7 +229,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">list.eQTL</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="va">gene_index</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">`common.snp`</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="extract-tissue-specific-eqtls">Extract tissue-specific eQTLs<a class="anchor" aria-label="anchor" href="#extract-tissue-specific-eqtls"></a>
+<h3 id="step-5-extract-tissue-specific-eqtls">Step 5: Extract tissue-specific eQTLs<a class="anchor" aria-label="anchor" href="#step-5-extract-tissue-specific-eqtls"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_name</span> <span class="op">=</span> <span class="st">'CCT8L2'</span> <span class="co">## gene name</span></span>
@@ -231,7 +239,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">list.eQTL</span><span class="op">[[</span><span class="va">tissue_index</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="va">gene_index</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">`single.snp`</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="gene-trait-association-tests">Gene-trait association tests<a class="anchor" aria-label="anchor" href="#gene-trait-association-tests"></a>
+<h3 id="step-6-gene-trait-association-tests">Step 6: Gene-trait association tests<a class="anchor" aria-label="anchor" href="#step-6-gene-trait-association-tests"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)</span></span>
