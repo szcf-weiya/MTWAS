@@ -486,8 +486,8 @@ also specify the index of tissue to get the corresponding ts-eQTL,</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">summary_stats</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    1000 obs. of  5 variables:</span></span>
 <span><span class="co">#&gt;  $ rsid: chr  "rs7287144" "rs5748662" "rs4010554" "rs4010558" ...</span></span>
-<span><span class="co">#&gt;  $ a1  : chr  "G" "A" "A" "A" ...</span></span>
-<span><span class="co">#&gt;  $ a2  : chr  "A" "G" "C" "G" ...</span></span>
+<span><span class="co">#&gt;  $ ref : chr  "G" "A" "A" "A" ...</span></span>
+<span><span class="co">#&gt;  $ alt : chr  "A" "G" "C" "G" ...</span></span>
 <span><span class="co">#&gt;  $ chr : int  22 22 22 22 22 22 22 22 22 22 ...</span></span>
 <span><span class="co">#&gt;  $ z   : num  0.584 0.638 0.857 0.835 0.29 ...</span></span></code></pre></div>
 <p>Then perform an association test in a tissue-specific manner to
@@ -495,10 +495,10 @@ retain the tissue specificity of the trait-gene associations.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/twas.single.trait.html">twas.single.trait</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_data</span>, <span class="va">list.ts.eQTL</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $zstat</span></span>
-<span><span class="co">#&gt;           tissue1   tissue2   tissue3   tissue4   tissue5</span></span>
-<span><span class="co">#&gt; OR11H1 -0.7725160  0.157939  0.204543 0.0847286 -1.105520</span></span>
-<span><span class="co">#&gt; POTEH   1.4419600  0.000000 -0.321247 0.0000000  1.903690</span></span>
-<span><span class="co">#&gt; CCT8L2 -0.0468013 -1.106580 -2.510330 0.7973990  0.929517</span></span>
+<span><span class="co">#&gt;           tissue1   tissue2   tissue3    tissue4   tissue5</span></span>
+<span><span class="co">#&gt; OR11H1  0.7725160 -0.157939 -0.204543 -0.0847286  1.105520</span></span>
+<span><span class="co">#&gt; POTEH  -1.4419600  0.000000  0.321247  0.0000000 -1.903690</span></span>
+<span><span class="co">#&gt; CCT8L2  0.0468013  1.106580  2.510330 -0.7973990 -0.929517</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pval</span></span>
 <span><span class="co">#&gt;          tissue1   tissue2    tissue3   tissue4    tissue5</span></span>
