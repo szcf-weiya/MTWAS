@@ -130,7 +130,7 @@ soda_model_imp_share <- function(j, gam, E, dat, pos, nF0 = 5,
       i <- 1
       fixset <- numeric(0)
 
-      while(i < (sum(temp$sdev^2 >=2)+1)){
+      while(i < (sum(prcomp(scale(yy0))$sdev^2 >=2)+1)){
         pca.var <- pca.var + PoV[i]
         yy <- yy.pca[,i]
         train.y <- (yy) - mean(yy)
