@@ -8,15 +8,16 @@ genetic effects in identifying gene-trait associations.
 
 :bulb: We provide pre-trained eQTL weights with MTWAS on 47 **GTEx version 8** tissues, 13 types of immune cells and 2 activation conditions of the **DICE** dataset, and 14 immune cell types from the single-cell RNA-seq **OneK1K** dataset.
 
-:smiley: You could either download the pre-trained MTWAS weights (easy and recommended), or generate your own files!
+:smiley: You could either use the pre-trained MTWAS weights (:star:easy and recommended), or generate your own files!
 
 ## Table of contents
-* [Prerequisites](#white-check-mark-prerequisites)
-* [Install](#hammer_and_wrench-install)
-* [LD prepared](#rocket-getting-started)
-* [Estimation of heritability and inflation factor](#rocket-estimation-of-heritability-and-inflation-factor)
-* [Output](#bulb-output)
-* [A Simplified Pipeline](#key-a-simplified-pipeline)
+* [Prerequisites](#white_check_mark-prerequisites)
+* [Installation](#hammer_and_wrench-installation)
+* [Prepare GWAS summary statistics](#scroll-prepare-gwas-summary-statistics)
+* [Run MTWAS with pre-trained GTEx v8 weights](#rocket-run-mtwas-with-pre-trained-gtex-v8-weights)
+* [Run MTWAS with pre-trained DICE weights](#rocket-run-mtwas-with-pre-trained-dice-weights)
+* [Run MTWAS with pre-trained OneK1K weights](#rocket-run-mtwas-with-pre-trained-onek1k-weights)
+* [Train MTWAS with your own datasets](#key-train-your-own-weights)
 
 
 ## :white_check_mark: Prerequisites
@@ -32,20 +33,8 @@ The software is developed and tested in Linux and Windows environments.
 devtools::install_github("szcf-weiya/MTWAS")
 ```
 
-## :rocket: Getting Started
-
-
-## :one: Run MTWAS with pre-trained GTEx v8 weights (:star:Easy and Recommended)
-
-### Download the pre-trained files:
-
-```bash
-wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate
-tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
-```
-
-### Prepare the GWAS summary statistics in the following format (including the header line):
-
+## :scroll: Prepare GWAS summary statistics
+Please prepare the GWAS summary statistics in the following format (including the header line):
 ```
    chr        rsid      a1    a2       z         
     1      rs4040617    G     A     -0.199    
@@ -62,6 +51,19 @@ tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
 **a2**: alternative allele
 
 **z**: GWAS z score
+
+
+## :rocket: Run MTWAS with pre-trained GTEx v8 weights
+
+
+### Download the pre-trained files:
+
+```bash
+wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate
+tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
+```
+
+
 
 ### MTWAS analysis:
 
@@ -81,14 +83,16 @@ load(paste0('./gtex_v8_mtwas_eqtls/', cell_type, '/twas_eqtl_chr', chr, '.RData'
 results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl) 
 head(results)
 ```
+## :rocket: Run MTWAS with pre-trained DICE weights
+## :rocket: Run MTWAS with pre-trained OneK1K weights
 
 
 
-## :two: Train your own weights
+## :key: Train your own weights
 
 We also provide functions to train MTWAS with your own datasets!
 
-### Data preparation
+### Step 1: Data preparation
 
 In order to derive your own MTWAS weights, three types of data are necessary. There is a demo dataset built in our R package:
 
@@ -135,7 +139,7 @@ The orders of the columns and rows of the matrices are not necessary to be the s
 :exclamation: Please NOTE that the position of `dat$bim$V4` and `E.info` should be the same build (e.g., both are hg19, or hg38, or etc.)
 
 
-### Data imputation and formatting
+### Step 2: Data imputation and formatting
 ```r
 library(MTWAS)
 data('demo')
@@ -144,7 +148,7 @@ twas_dat <- format_twas_dat(E=demo$E, E.info=demo$E.info, dat=demo$dat)
 names(twas_dat)
 ```
 
-### Model training
+### Step 3: Model training
 
 ```r
 # load TWAS data
@@ -154,7 +158,7 @@ ct.eQTL = select.ct.eQTL(twas_dat, verbose = F, ncores = 1)
 list.eQTL = select.ts.eQTL(twas_dat, ct.eQTL = ct.eQTL, ncores = 1)
 ```
 
-### Extract cross-tissue eQTLs
+### Step 4: Extract cross-tissue eQTLs
 
 ```r
 gene_name = 'IL17RA' ## gene name
@@ -163,7 +167,7 @@ gene_index = which(names(ct.eQTL)==gene_name)
 print(list.eQTL[[1]][[gene_index]]$`common.snp`) 
 ```
 
-### Extract tissue-specific eQTLs
+### Step 5: Extract tissue-specific eQTLs
 
 ```r
 gene_name = 'CCT8L2' ## gene name
@@ -173,7 +177,7 @@ tissue_index = 1 ## tissue specific
 print(list.eQTL[[tissue_index]][[gene_index]]$`single.snp`)
 ```
 
-### Gene-trait association tests
+### Step 6: Gene-trait association tests
 
 ```r
 # load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)
