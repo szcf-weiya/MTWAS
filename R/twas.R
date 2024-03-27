@@ -56,7 +56,7 @@ twas.multi.trait = function(list.stats, x, list.ts.eQTL, ncores = 1) {
 
 #' An association test in a tissue-specific manner for a phenotype (trait).
 #' @param stats summary statistics for a phenotype. It can be a filename to be read or a data.frame.
-#' Suppose it has 5 columns with colnames \code{rsid}, \code{a1}, \code{a2}, \code{chr}, \code{z}.
+#' Suppose it has 5 columns with colnames \code{rsid}, \code{ref}, \code{alt}, \code{chr}, \code{z}.
 #' @param x twas data list
 #' @param list.ts.eQTL a list of \code{ts.eQTL}, each element corresponds to a tissue
 #' @return z-statistics and p-values. Both are of size n_gene x n_tissue.
@@ -83,7 +83,7 @@ twas.single.trait = function(stats, x, list.ts.eQTL) {
   list(zstat = z_all, pval = p_all)
 }
 
-## stats:: rsid, a1, a2, z
+## stats:: chr, rsid, ref, alt, z
 #' MTWAS main function
 #' @param stats summary statistics
 #' @param soda.all.imp a list of all selected important genes
@@ -112,7 +112,7 @@ twas.res <- function(stats, soda.all.imp,
   stats <- stats[!duplicated(stats$rsid),]
   dat.bim <- merge(dat$bim, stats, by='rsid',all.x = T)
   dat.bim <- dat.bim[order(bim.order), ]
-  sig <- agtc(dat.bim$V5, dat.bim$V6, dat.bim$a1, dat.bim$a2)
+  sig <- agtc(dat.bim$V6, dat.bim$V5, dat.bim$ref, dat.bim$alt)
   zz <- dat.bim$z*sig
   zz[is.na(zz)] <- 0
   z_g <- c()
@@ -157,7 +157,7 @@ twas.res <- function(stats, soda.all.imp,
 
 
 #' Run association test with downloaded trained data
-#' @param stats summary statistics for a phenotype. It can be a filename to be read or a data.frame, should include columns rsid, a1, a2, chr, z
+#' @param stats summary statistics for a phenotype. It can be a filename to be read or a data.frame, should include columns rsid, ref, alt, chr, z
 #' @param twas_bim pre-downloaded file 
 #' @param twas_eqtl pre-downloaded file 
 #' @return mtwas summary statistics
@@ -173,7 +173,7 @@ run_mtwas_easy <- function(stats,
   stats <- stats[!duplicated(stats$rsid),]
   dat.bim <- merge(twas_bim, stats, by='rsid',all.x = T)
   dat.bim <- dat.bim[order(bim.order), ]
-  sig <- agtc(dat.bim$V5, dat.bim$V6, dat.bim$a1, dat.bim$a2)
+ sig <- agtc(dat.bim$V6, dat.bim$V5, dat.bim$ref, dat.bim$alt)
   zz <- dat.bim$z*sig
   zz[is.na(zz)] <- 0
   z_g <- c()
