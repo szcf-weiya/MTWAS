@@ -40,7 +40,15 @@ tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
     1      rs9442385    T     G     -0.016    
     ...
 ```
+**chr**: chromosome
 
+**rsid**: SNP rsid
+
+**a1**: reference allele
+
+**a2**: alternative allele
+
+**z**: GWAS z score
 
 ### MTWAS analysis:
 
