@@ -170,10 +170,10 @@ run_mtwas_easy <- function(stats,
                            #E.info,
                            twas_eqtl, pred_res=NULL){
   twas_bim$rsid = twas_bim$V2 # temporary use
-  bim.order <- 1:nrow(twas_bim) ## change to rsid
+  twas_bim$bim.order <- 1:nrow(twas_bim) ## change to rsid
   stats <- stats[!duplicated(stats$rsid),]
   dat.bim <- merge(twas_bim, stats, by='rsid',all.x = T)
-  dat.bim <- dat.bim[order(bim.order), ]
+  dat.bim <- dat.bim[order(twas_bim$bim.order), ]
  sig <- agtc(dat.bim$V6, dat.bim$V5, dat.bim$ref, dat.bim$alt)
   zz <- dat.bim$z*sig
   zz[is.na(zz)] <- 0
