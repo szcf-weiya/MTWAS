@@ -87,8 +87,8 @@ The output `results` is a data.frame with the following format:
 
 ```
    gene        MTWAS_Z      MTWAS_P     pred_r2      pred_pv         
-  PLA2G3        -1.87       0.062        0.01         0.02    
-  PANX2         -1.83       0.066        0.01         0.08     
+  PLA2G3        -1.87        0.062        0.01        0.02    
+  PANX2         -1.83        0.066        0.01        0.08     
     ...
 ```
 
