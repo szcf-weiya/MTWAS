@@ -102,7 +102,7 @@ The output `results` is a data.frame with the following format:
 
 **pred_pv**: prediction accuracy of the gene expression evaluated by an F-test
 
-Note that we output results of all genes. Users could specify their thresholds of outputs, e.g.,`results[results$pred_pv < 0.05 & results$MTWAS_P < 5e-6, ]`.
+Note that we output results of all genes. Users could specify the criteria of the outputs, e.g.,`results[results$pred_pv < 0.05 & results$MTWAS_P < 5e-6, ]`.
 
 ## :rocket: Run MTWAS with pre-trained DICE weights
 ## :rocket: Run MTWAS with pre-trained OneK1K weights
