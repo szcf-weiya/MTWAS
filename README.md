@@ -63,6 +63,13 @@ wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c394
 tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
 ```
 
+If you are working on UKBB phenotypes, please download from the following weights instead (We restricted eQTLs within UKBB SNPs):
+
+```bash
+wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/4d2186f782024ace80f5/?dl=1 --no-check-certificate
+tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
+```
+The result table for UKBB phenotypes (including 84 self-reported cancer and non-cancer illness phenotypes with effective sample sizes larger than 5,000) can also be directly downloaded from ` `.
 
 ### MTWAS analysis:
 
