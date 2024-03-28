@@ -108,10 +108,10 @@ twas.res <- function(stats, soda.all.imp,
   # dat$bim$rsid <- hm3$SNP[match(snp.gtex$snp_hg38, hm3$snp_hg38)]
   #
   dat$bim$rsid = dat$bim$V2 # temporary use
-  bim.order <- 1:nrow(dat$bim) ## change to rsid
+  dat$bim$bim.order <- 1:nrow(dat$bim) ## change to rsid
   stats <- stats[!duplicated(stats$rsid),]
   dat.bim <- merge(dat$bim, stats, by='rsid',all.x = T)
-  dat.bim <- dat.bim[order(bim.order), ]
+  dat.bim <- dat.bim[order(dat.bim$bim.order), ]
   sig <- agtc(dat.bim$V6, dat.bim$V5, dat.bim$ref, dat.bim$alt)
   zz <- dat.bim$z*sig
   zz[is.na(zz)] <- 0
