@@ -64,7 +64,6 @@ tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
 ```
 
 
-
 ### MTWAS analysis:
 
 We use chromosome 22 on whole blood as an example. The list of cell types is detailed in `ct_use.RData`.
@@ -80,9 +79,31 @@ load(paste0('./gtex_v8_mtwas_eqtls/twas_bim_chr', chr, '.RData'))
 ## load twas eqtl files (downloaded)
 load(paste0('./gtex_v8_mtwas_eqtls/', cell_type, '/twas_eqtl_chr', chr, '.RData'))
 ## Run mtwas and derive the gene-trait association test statistics
-results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl) 
+results = run_mtwas_easy(summary_stats, twas_bim, twas_eqtl, pred_res) 
 head(results)
 ```
+
+The output `results` is a data.frame with the following format:
+
+```
+   gene        MTWAS_Z      MTWAS_P     pred_r2      pred_pv         
+  PLA2G3        -1.87       0.062        0.01         0.02    
+  PANX2         -1.83       0.066        0.01         0.08     
+    ...
+```
+
+**gene**: gene name
+
+**MTWAS_Z**: gene-trait association Z score derived by MTWAS
+
+**MTWAS_P**: gene-trait association P value derived by MTWAS
+
+**pred_r2**: prediction accuracy of the gene expression evaluated by $r^2$
+
+**pred_pv**: prediction accuracy of the gene expression evaluated by an F-test
+
+Note that we output results of all genes. Users could specify their thresholds of outputs, e.g.,`results[results$pred_pv < 0.05 & results$MTWAS_P < 5e-6, ]`.
+
 ## :rocket: Run MTWAS with pre-trained DICE weights
 ## :rocket: Run MTWAS with pre-trained OneK1K weights
 
