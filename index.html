@@ -201,6 +201,41 @@
 <h2 id="rocket-run-mtwas-with-pre-trained-onek1k-weights">
 <span class="emoji" data-emoji="rocket">🚀</span> Run MTWAS with pre-trained OneK1K weights<a class="anchor" aria-label="anchor" href="#rocket-run-mtwas-with-pre-trained-onek1k-weights"></a>
 </h2>
+<div class="section level3">
+<h3 id="download-the-pre-trained-files-2">Download the pre-trained files:<a class="anchor" aria-label="anchor" href="#download-the-pre-trained-files-2"></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> onek1k_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/de07d968dfb94897b814/<span class="pp">?</span>dl=1 <span class="at">--no-check-certificate</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> onek1k_mtwas_eqtls.tar.gz</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="mtwas-analysis-2">MTWAS analysis:<a class="anchor" aria-label="anchor" href="#mtwas-analysis-2"></a>
+</h3>
+<p>We use chromosome 22 on CD4 NC cell line as an example. The list of cell types is detailed in <code>ct_use.RData</code> (remember to change the path to the downloaded folder).</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"summary_stats"</span><span class="op">)</span> <span class="co">## EXAMPLE GWAS summary stats (could be specified by users, format: a data.frame with colnames: chr, rsid, a1, a2, z)</span></span>
+<span><span class="va">chr</span> <span class="op">=</span> <span class="fl">22</span></span>
+<span><span class="va">cell_type</span> <span class="op">=</span> <span class="st">'CD4_NC'</span></span>
+<span><span class="co">### remember to change the path to the downloaded folder!!!</span></span>
+<span><span class="co">## load twas bim files (downloaded)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'./onek1k_mtwas_eqtls/twas_bim_chr'</span>, <span class="va">chr</span>, <span class="st">'.RData'</span><span class="op">)</span><span class="op">)</span>  </span>
+<span><span class="co">## load twas eqtl files (downloaded)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'./onek1k_mtwas_eqtls/'</span>, <span class="va">cell_type</span>, <span class="st">'/twas_eqtl_chr'</span>, <span class="va">chr</span>, <span class="st">'.RData'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## Run mtwas and derive the gene-trait association test statistics</span></span>
+<span><span class="va">results</span> <span class="op">=</span> <span class="fu"><a href="reference/run_mtwas_easy.html">run_mtwas_easy</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_bim</span>, <span class="va">twas_eqtl</span>, <span class="va">pred_res</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
+<p>The output <code>results</code> is a data.frame with the following format:</p>
+<pre><code>   gene           MTWAS_Z      MTWAS_P     pred_r2      pred_pv         
+  APOL6            1.80        0.072        0.001        0.65    
+  RP6-109B7.3     -1.77        0.076        0.038       7.4e-09     
+    ...</code></pre>
+<p><strong>gene</strong>: gene name</p>
+<p><strong>MTWAS_Z</strong>: gene-trait association Z score derived by MTWAS</p>
+<p><strong>MTWAS_P</strong>: gene-trait association P value derived by MTWAS</p>
+<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <span class="math inline"><em>r</em><sup>2</sup></span></p>
+<p><strong>pred_pv</strong>: prediction accuracy of the gene expression evaluated by an F-test</p>
+<p>Note that we output results of all genes. Users could specify the criteria of the outputs, e.g.,<code>results[results$pred_pv &lt; 0.05 &amp; results$MTWAS_P &lt; 5e-6, ]</code>.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="key-train-your-own-weights">
@@ -211,7 +246,7 @@
 <h3 id="step-1-data-preparation">Step 1: Data preparation<a class="anchor" aria-label="anchor" href="#step-1-data-preparation"></a>
 </h3>
 <p>In order to derive your own MTWAS weights, three types of data are necessary. There is a demo dataset built in our R package:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'demo'</span><span class="op">)</span></span>
 <span><span class="co"># demo$dat</span></span>
@@ -222,7 +257,7 @@
 </h4>
 <p>Format: a <strong>list</strong> of plink bfiles, including bim, fam, bed</p>
 <p>One could use the R function <code>read_plink</code> in package <code>EBPRS</code> to read the plink files:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">EBPRS</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_plink</span><span class="op">(</span><span class="st">'PATH_TO_PLINK_BFILE'</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -248,7 +283,7 @@
 <div class="section level3">
 <h3 id="step-2-data-imputation-and-formatting">Step 2: Data imputation and formatting<a class="anchor" aria-label="anchor" href="#step-2-data-imputation-and-formatting"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/szcf-weiya/MTWAS" class="external-link">MTWAS</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'demo'</span><span class="op">)</span></span>
 <span><span class="co">### substitute the input with your own dataset</span></span>
@@ -258,7 +293,7 @@
 <div class="section level3">
 <h3 id="step-3-model-training">Step 3: Model training<a class="anchor" aria-label="anchor" href="#step-3-model-training"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load TWAS data</span></span>
 <span><span class="co"># select cross-tissue eQTLs</span></span>
 <span><span class="va">ct.eQTL</span> <span class="op">=</span> <span class="fu"><a href="reference/select.ct.eQTL.html">select.ct.eQTL</a></span><span class="op">(</span><span class="va">twas_dat</span>, verbose <span class="op">=</span> <span class="cn">F</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -268,7 +303,7 @@
 <div class="section level3">
 <h3 id="step-4-extract-cross-tissue-eqtls">Step 4: Extract cross-tissue eQTLs<a class="anchor" aria-label="anchor" href="#step-4-extract-cross-tissue-eqtls"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_name</span> <span class="op">=</span> <span class="st">'IL17RA'</span> <span class="co">## gene name</span></span>
 <span><span class="va">gene_index</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ct.eQTL</span><span class="op">)</span><span class="op">==</span><span class="va">gene_name</span><span class="op">)</span></span>
 <span><span class="co">## ct-eQTLs for gene IL17RA</span></span>
@@ -277,7 +312,7 @@
 <div class="section level3">
 <h3 id="step-5-extract-tissue-specific-eqtls">Step 5: Extract tissue-specific eQTLs<a class="anchor" aria-label="anchor" href="#step-5-extract-tissue-specific-eqtls"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gene_name</span> <span class="op">=</span> <span class="st">'CCT8L2'</span> <span class="co">## gene name</span></span>
 <span><span class="va">gene_index</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ct.eQTL</span><span class="op">)</span><span class="op">==</span><span class="va">gene_name</span><span class="op">)</span></span>
 <span><span class="va">tissue_index</span> <span class="op">=</span> <span class="fl">1</span> <span class="co">## tissue specific</span></span>
@@ -287,7 +322,7 @@
 <div class="section level3">
 <h3 id="step-6-gene-trait-association-tests">Step 6: Gene-trait association tests<a class="anchor" aria-label="anchor" href="#step-6-gene-trait-association-tests"></a>
 </h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load GWAS summary statistics (data.frame, colnames: rsid, a1, a2, chr, z)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"summary_stats"</span><span class="op">)</span></span>
 <span><span class="co"># association test</span></span>
