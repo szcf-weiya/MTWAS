@@ -141,7 +141,7 @@ twas.res <- function(stats, soda.all.imp,
           sig_g2 <- t(w)%*%covm%*%w
           z_g[l] <- sum(w*c(sqrt(diag(covm)))*z_l)/sqrt(sig_g2)
       }else if(length(zz.use)==1){
-        z_g[l] <-  z_l[zz.use]
+        z_g[l] <-  z_l[zz.use]*sign(w[zz.use])
       }else{
         z_g[l] <-  0
       }
@@ -202,7 +202,7 @@ run_mtwas_easy <- function(stats,
         sig_g2 <- t(w)%*%covm%*%w
         z_g[l] <- sum(w*c(sqrt(diag(covm)))*z_l)/sqrt(sig_g2)
       }else if(length(zz.use)==1){
-        z_g[l] <-  z_l[zz.use]
+        z_g[l] <-  z_l[zz.use]*sign(w[zz.use])
       }else{
         z_g[l] <-  0
       }
