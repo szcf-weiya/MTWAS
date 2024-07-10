@@ -5,58 +5,44 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Partitioning and aggregating cross-tissue and tissue-specific genetic effects in identifying gene-trait associations.">
 <title>Multi-tissue Transcriptome-Wide Association Studies • MTWAS</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Multi-tissue Transcriptome-Wide Association Studies">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Multi-tissue Transcriptome-Wide Association Studies">
+<meta name="description" content="Partitioning and aggregating cross-tissue and tissue-specific genetic effects in identifying gene-trait associations.">
 <meta property="og:description" content="Partitioning and aggregating cross-tissue and tissue-specific genetic effects in identifying gene-trait associations.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="index.html">MTWAS</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="articles/mtwas.html">Tutorial</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/mtwas.html">Tutorial</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/szcf-weiya/MTWAS/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/szcf-weiya/MTWAS/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -65,7 +51,7 @@
 </h1></div>
 <p>MTWAS is an R package for the paper</p>
 <blockquote>
-<p>Song, S., Wang, L., Hou, L., &amp; Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific genetic effects in identifying gene-trait associations.</p>
+<p>Song, S., Wang, L., Hou, L., &amp; Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific genetic effects to identify gene-trait associations. Nature Communications, 15(1), 5769. <a href="https://doi.org/10.1038/s41467-024-49924-4" class="external-link uri">https://doi.org/10.1038/s41467-024-49924-4</a></p>
 </blockquote>
 <p><span class="emoji" data-emoji="bulb">💡</span> We provide pre-trained eQTL weights with MTWAS on 47 <strong>GTEx version 8</strong> tissues, 13 types of immune cells and 2 activation conditions of the <strong>DICE</strong> dataset, and 14 immune cell types from the single-cell RNA-seq <strong>OneK1K</strong> dataset.</p>
 <p><span class="emoji" data-emoji="smiley">😃</span> You could either run MTWAS with the pre-trained weights (<span class="emoji" data-emoji="star">⭐</span>easy and recommended), or train your own models with the expression data!</p>
@@ -104,10 +90,10 @@
 <span class="emoji" data-emoji="scroll">📜</span> Prepare GWAS summary statistics<a class="anchor" aria-label="anchor" href="#scroll-prepare-gwas-summary-statistics"></a>
 </h2>
 <p>Please prepare the GWAS summary statistics in the following format (including the header line):</p>
-<pre><code>   chr        rsid     ref   alt       z         
-    1      rs4040617    G     A     -0.199    
-    1      rs4075116    C     T      0.646     
-    1      rs9442385    T     G     -0.016    
+<pre><code>   chr        rsid     ref   alt       z
+    1      rs4040617    G     A     -0.199
+    1      rs4075116    C     T      0.646
+    1      rs9442385    T     G     -0.016
     ...</code></pre>
 <p><strong>chr</strong>: chromosome</p>
 <p><strong>rsid</strong>: SNP rsid</p>
@@ -147,14 +133,14 @@
 <span><span class="va">results</span> <span class="op">=</span> <span class="fu"><a href="reference/run_mtwas_easy.html">run_mtwas_easy</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_bim</span>, <span class="va">twas_eqtl</span>, <span class="va">pred_res</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <p>The output <code>results</code> is a data.frame with the following format:</p>
-<pre><code>   gene        MTWAS_Z      MTWAS_P     pred_r2      pred_pv         
-  PLA2G3        -1.87        0.062        0.01        0.02    
-  PANX2         -1.83        0.066        0.01        0.08     
+<pre><code>   gene        MTWAS_Z      MTWAS_P     pred_r2      pred_pv
+  PLA2G3        -1.87        0.062        0.01        0.02
+  PANX2         -1.83        0.066        0.01        0.08
     ...</code></pre>
 <p><strong>gene</strong>: gene name</p>
 <p><strong>MTWAS_Z</strong>: gene-trait association Z score derived by MTWAS</p>
 <p><strong>MTWAS_P</strong>: gene-trait association P value derived by MTWAS</p>
-<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <span class="math inline"><em>r</em><sup>2</sup></span></p>
+<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>r</mi><mn>2</mn></msup><annotation encoding="application/x-tex">r^2</annotation></semantics></math></p>
 <p><strong>pred_pv</strong>: prediction accuracy of the gene expression evaluated by an F-test</p>
 <p>Note that we output results of all genes. Users could specify the criteria of the outputs, e.g.,<code>results[results$pred_pv &lt; 0.05 &amp; results$MTWAS_P &lt; 5e-6, ]</code>.</p>
 </div>
@@ -187,14 +173,14 @@
 <span><span class="va">results</span> <span class="op">=</span> <span class="fu"><a href="reference/run_mtwas_easy.html">run_mtwas_easy</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_bim</span>, <span class="va">twas_eqtl</span>, <span class="va">pred_res</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <p>The output <code>results</code> is a data.frame with the following format:</p>
-<pre><code>   gene                 MTWAS_Z      MTWAS_P     pred_r2      pred_pv         
-  ENSG00000232754         3.08        0.002        0.04        0.99    
-  ENSG00000100225         2.46        0.014        0.07        0.01     
+<pre><code>   gene                 MTWAS_Z      MTWAS_P     pred_r2      pred_pv
+  ENSG00000232754         3.08        0.002        0.04        0.99
+  ENSG00000100225         2.46        0.014        0.07        0.01
     ...</code></pre>
 <p><strong>gene</strong>: gene name</p>
 <p><strong>MTWAS_Z</strong>: gene-trait association Z score derived by MTWAS</p>
 <p><strong>MTWAS_P</strong>: gene-trait association P value derived by MTWAS</p>
-<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <span class="math inline"><em>r</em><sup>2</sup></span></p>
+<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>r</mi><mn>2</mn></msup><annotation encoding="application/x-tex">r^2</annotation></semantics></math></p>
 <p><strong>pred_pv</strong>: prediction accuracy of the gene expression evaluated by an F-test</p>
 <p>Note that we output results of all genes. Users could specify the criteria of the outputs, e.g.,<code>results[results$pred_pv &lt; 0.05 &amp; results$MTWAS_P &lt; 5e-6, ]</code>.</p>
 </div>
@@ -227,14 +213,14 @@
 <span><span class="va">results</span> <span class="op">=</span> <span class="fu"><a href="reference/run_mtwas_easy.html">run_mtwas_easy</a></span><span class="op">(</span><span class="va">summary_stats</span>, <span class="va">twas_bim</span>, <span class="va">twas_eqtl</span>, <span class="va">pred_res</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <p>The output <code>results</code> is a data.frame with the following format:</p>
-<pre><code>   gene           MTWAS_Z      MTWAS_P     pred_r2      pred_pv         
-  APOL6            1.80        0.072        0.001        0.65    
-  RP6-109B7.3     -1.77        0.076        0.038       7.4e-09     
+<pre><code>   gene           MTWAS_Z      MTWAS_P     pred_r2      pred_pv
+  APOL6            1.80        0.072        0.001        0.65
+  RP6-109B7.3     -1.77        0.076        0.038       7.4e-09
     ...</code></pre>
 <p><strong>gene</strong>: gene name</p>
 <p><strong>MTWAS_Z</strong>: gene-trait association Z score derived by MTWAS</p>
 <p><strong>MTWAS_P</strong>: gene-trait association P value derived by MTWAS</p>
-<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <span class="math inline"><em>r</em><sup>2</sup></span></p>
+<p><strong>pred_r2</strong>: prediction accuracy of the gene expression evaluated by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>r</mi><mn>2</mn></msup><annotation encoding="application/x-tex">r^2</annotation></semantics></math></p>
 <p><strong>pred_pv</strong>: prediction accuracy of the gene expression evaluated by an F-test</p>
 <p>Note that we output results of all genes. Users could specify the criteria of the outputs, e.g.,<code>results[results$pred_pv &lt; 0.05 &amp; results$MTWAS_P &lt; 5e-6, ]</code>.</p>
 </div>
@@ -268,9 +254,9 @@
 </h4>
 <p>Genes that we are interested in to derive the gene-trait associations.</p>
 <p>Format: a <strong>data.frame</strong> in the following format (including the header line):</p>
-<pre><code>   chr        start        end        gene         
-    22      15528192    15529139     OR11H1   
-    22      15690026    15721631     POTEH          
+<pre><code>   chr        start        end        gene
+    22      15528192    15529139     OR11H1
+    22      15690026    15721631     POTEH
     ...</code></pre>
 </div>
 <div class="section level4">
@@ -392,15 +378,15 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

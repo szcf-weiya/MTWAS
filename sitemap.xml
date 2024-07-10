@@ -1,72 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/404.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/articles/mtwas.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/index.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/create_pmatrix_from_terms.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/demo.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/find.index.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/format_twas_dat.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/impute.E.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/run_mtwas_easy.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/select.ct.eQTL.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/select.ts.eQTL.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/soda_model_imp_share.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/soda_model_imp_single.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/summary_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/twas.multi.trait.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/twas.res.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/twas.single.trait.html</loc>
-  </url>
-  <url>
-    <loc>https://hohoweiya.xyz/MTWAS/reference/twas_data.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://hohoweiya.xyz/MTWAS/404.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/LICENSE-text.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/LICENSE.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/articles/index.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/articles/mtwas.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/authors.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/index.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/create_pmatrix_from_terms.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/demo.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/find.index.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/format_twas_dat.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/impute.E.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/index.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/run_mtwas_easy.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/select.ct.eQTL.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/select.ts.eQTL.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/soda_model_imp_share.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/soda_model_imp_single.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/summary_stats.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/twas.multi.trait.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/twas.res.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/twas.single.trait.html</loc></url>
+<url><loc>https://hohoweiya.xyz/MTWAS/reference/twas_data.html</loc></url>
 </urlset>
+
