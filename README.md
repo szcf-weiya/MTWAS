@@ -2,8 +2,7 @@
 
 MTWAS is an R package for the paper
 
-> Song, S., Wang, L., Hou, L., & Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific
-genetic effects in identifying gene-trait associations.
+> Song, S., Wang, L., Hou, L., & Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific genetic effects to identify gene-trait associations. Nature Communications, 15(1), 5769. https://doi.org/10.1038/s41467-024-49924-4
 
 
 :bulb: We provide pre-trained eQTL weights with MTWAS on 47 **GTEx version 8** tissues, 13 types of immune cells and 2 activation conditions of the **DICE** dataset, and 14 immune cell types from the single-cell RNA-seq **OneK1K** dataset.
