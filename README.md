@@ -318,8 +318,7 @@ The details of output and data formats can be found in the auto-generated vignet
 
 ## References
 **MTWAS software**
-> Song, S., Wang, L., Hou, L., & Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific
-genetic effects in identifying gene-trait associations.
+> Song, S., Wang, L., Hou, L., & Liu, J. S. (2024). Partitioning and aggregating cross-tissue and tissue-specific genetic effects to identify gene-trait associations. Nature Communications, 15(1), 5769. https://doi.org/10.1038/s41467-024-49924-4
 
 **The GTEx dataset**
 > https://gtexportal.org/home/
