@@ -58,14 +58,14 @@ Please prepare the GWAS summary statistics in the following format (including th
 ### Download the pre-trained files:
 
 ```bash
-wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/5633911d7c39431b8be8/?dl=1 --no-check-certificate
+wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/d/8bf84211cf3247a0b480/files/?p=%2Fgtex_v8_mtwas_eqtls.tar.gz&dl=1 --no-check-certificate
 tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
 ```
 
 If you are working on UKBB phenotypes, please download from the following weights instead (We restricted eQTLs within UKBB SNPs):
 
 ```bash
-wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/4d2186f782024ace80f5/?dl=1 --no-check-certificate
+wget -O gtex_v8_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/d/8bf84211cf3247a0b480/files/?p=%2Fgtex_v8_mtwas_eqtls_ukbb.tar.gz&dl=1 --no-check-certificate
 tar -zxvf gtex_v8_mtwas_eqtls.tar.gz
 ```
 The result table for UKBB phenotypes (including 84 self-reported cancer and non-cancer illness phenotypes with effective sample sizes larger than 5,000) can also be directly downloaded from the supplementary files of the paper.
@@ -117,7 +117,7 @@ Note that we output results of all genes. Users could specify the criteria of th
 ### Download the pre-trained files:
 
 ```bash
-wget -O dice_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/c51dcb6a7bbb417b80be/?dl=1 --no-check-certificate
+wget -O dice_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/d/8bf84211cf3247a0b480/files/?p=%2Fdice_mtwas_eqtls.tar.gz&dl=1 --no-check-certificate
 tar -zxvf dice_mtwas_eqtls.tar.gz
 ```
 
@@ -169,7 +169,7 @@ Note that we output results of all genes. Users could specify the criteria of th
 ### Download the pre-trained files:
 
 ```bash
-wget -O onek1k_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/f/de07d968dfb94897b814/?dl=1 --no-check-certificate
+wget -O onek1k_mtwas_eqtls.tar.gz https://cloud.tsinghua.edu.cn/d/8bf84211cf3247a0b480/files/?p=%2Fonek1k_mtwas_eqtls.tar.gz&dl=1 --no-check-certificate
 tar -zxvf onek1k_mtwas_eqtls.tar.gz
 ```
 
