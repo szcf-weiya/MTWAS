@@ -168,8 +168,9 @@ Note that we output results of all genes. Users could specify the criteria of th
 
 ### Download the pre-trained files:
 
+Download link: `https://1drv.ms/u/c/9996dd35fdd8c998/EXJ8e5hc7oZInQzFJoWXoxoBd7elBlB6aMXz6odjFNItMw?e=RPtHIi`
+
 ```bash
-wget -O onek1k_mtwas_eqtls.tar.gz "https://cloud.tsinghua.edu.cn/d/8bf84211cf3247a0b480/files/?p=%2Fonek1k_mtwas_eqtls.tar.gz&dl=1" --no-check-certificate
 tar -zxvf onek1k_mtwas_eqtls.tar.gz
 ```
 
